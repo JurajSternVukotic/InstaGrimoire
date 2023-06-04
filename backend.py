@@ -57,7 +57,7 @@ def level(self):
 def level(self, value):
     if value < 0 or value > 9:
         raise ValueError("Mystra banned all spells over lvl 9 after the spell plague, and negative levels don't make sense")
-    self._levle = value 
+    self._level = value 
 
 @property
 def casting_time_value(self):
