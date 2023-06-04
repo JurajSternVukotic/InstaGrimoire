@@ -34,7 +34,7 @@ class RangeUnit(Enum):
 
 class Spell(db.Entity):
     id = PrimaryKey(int, auto = True)
-    name = Required(str)
+    name = Required(str, unique = True)
     level = Required(int)
     school = Required(str)
     casting_time_value = Required(int)
