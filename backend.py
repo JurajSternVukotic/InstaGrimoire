@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import Required
-from pony.orn import *
+from pony.orm import *
 
 db = Database()
 
@@ -15,4 +15,5 @@ class Spell(db.Entity):
     components = Required(str)
     description = Required(str)
     classes = Required(str)
+
 
