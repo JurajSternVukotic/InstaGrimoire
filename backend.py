@@ -14,14 +14,24 @@ class School(Enum):
     NECROMANCY = "Necromancy"
     TRANSMUTATION = "Transmutation"
 
+class CastingTimeUnit(Enum):
+    ACTION = "Action"
+    BONUS_ACTION = "Bonus Action"
+    REACTION = "Reaction"
+    SPECIAL = "Special"
+    MINUTE = "Minute"
+    HOUR = "Hour"
+
+
 
 
 class Spell(db.Entity):
     id = PrimaryKey(int, auto = True)
     name = Required(str)
     level = Required(int)
-    school = Required(Enum)
-    casting_time = Required(Enum)
+    school = Required(School)
+    casting_time_value = Required(int)
+    casting_time_unit = Required(CastingTimeUnit)
     range = Required(str)
     range = Required(int)
     components = Required(str)
@@ -39,3 +49,12 @@ def level(self, value):
         raise ValueError("Mystra banned all spells over lvl 9 after the spell plague, and negative levels don't make sense")
     self._levle = value 
 
+@property
+def casting_time_value(self):
+    return self._casting_time_value
+
+@casting_time_value.setter
+def casting_time_value(self, value):
+    if value < 0:
+        raise ValueError("Can not cast in negative time!")
+    self._casting_time_value = value 
