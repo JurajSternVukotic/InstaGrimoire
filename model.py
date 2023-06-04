@@ -89,6 +89,7 @@ class Spell(db.Entity):
             raise ValueError("Must provide material component")
         self.component_m = value
 
-    
-db.bind(provider='sqlite', filename='spells.db', create_db=True)
-db.generate_mapping(create_tables=True)
+
+def connect():
+    db.bind(provider='sqlite', filename='spells.db', create_db=True)
+    db.generate_mapping(create_tables=True)
