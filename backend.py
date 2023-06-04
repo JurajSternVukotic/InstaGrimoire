@@ -120,8 +120,6 @@ def material_description(self, value):
     if self.component_m is False and value is not None:
         raise ValueError("Material description should be none when there is no material component")
     
-
-
 db.bind(provider='sqlite', filename='spells.db', create_db=True)
 db.generate_mapping(create_tables=True)
 
@@ -142,3 +140,7 @@ with db_session:
         upcast="When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot above 1st.",
         classes="Wizard",
     )
+
+with db_session:
+    spell = Spell.get(name="Magic Missile")
+    print(spell.name, spell.level, spell.school, spell.description, spell.upcast)
