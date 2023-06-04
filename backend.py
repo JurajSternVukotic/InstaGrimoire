@@ -9,7 +9,7 @@ class Spell(db.Entity):
     name = Required(str)
     level = Required(int)
     school = Required(Enum)
-    casting_time = Requierd(Enum)
+    casting_time = Required(Enum)
     range = Required(str)
     range = Required(int)
     components = Required(str)
