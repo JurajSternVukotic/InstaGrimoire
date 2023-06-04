@@ -36,11 +36,11 @@ class Spell(db.Entity):
     id = PrimaryKey(int, auto = True)
     name = Required(str)
     level = Required(int)
-    school = Required(School)
+    school = Required(str)
     casting_time_value = Required(int)
-    casting_time_unit = Required(CastingTimeUnit)
+    casting_time_unit = Required(str)
     range_value = Optional(int)
-    range_unit = Required(RangeUnit)
+    range_unit = Required(str)
     component_v = Required(bool)
     component_s = Required(bool)
     component_m = Required(bool)
@@ -60,6 +60,16 @@ def level(self, value):
     self._level = value 
 
 @property
+def school_enum(self):
+    return School(self.school)
+
+@school_enum.setter
+def school_enum(self, value):
+    if not isinstance(value, School):
+        raise TypeError("Invalid magic school")
+    self.school = value.value
+
+@property
 def casting_time_value(self):
     return self._casting_time_value
 
@@ -68,6 +78,16 @@ def casting_time_value(self, value):
     if value < 0:
         raise ValueError("Can not cast in negative time!")
     self._casting_time_value = value 
+
+@property
+def casting_time_enum(self):
+    return CastingTimeUnit(self.casting_time)
+
+@casting_time_enum.setter
+def casting_time_enum(self, value):
+    if not isinstance(value, CastingTimeUnit):
+        raise TypeError("Invalid casting time unit")
+    self.casting_time = value.value
 
 @property
 def range_value(self):
@@ -80,6 +100,17 @@ def range_value(self, value):
     self._range_value = value
 
 @property
+def range_unit(self):
+    return RangeUnit(self.range_unit)
+
+@range_unit.setter
+def school_enum(self, value):
+    if not isinstance(value, RangeUnit):
+        raise TypeError("Invalid range unit")
+    self.range_unit = value.value
+
+
+@property
 def material_description(self):
     return self._material_description
 
@@ -87,3 +118,8 @@ def material_description(self):
 def material_description(self, value):
     if self.component_m is False and value is not None:
         raise ValueError("Material description should be none when there is no material component")
+    
+
+
+db.bind(provider='sqlite', filename='spells.db', create_db=True)
+db.generate_mapping(create_tables=True)
