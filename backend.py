@@ -22,6 +22,13 @@ class CastingTimeUnit(Enum):
     MINUTE = "Minute"
     HOUR = "Hour"
 
+class RangeUnit(Enum):
+    FEET = "Feet"
+    MILES = "Miles"
+    SELF = "Self"
+    TOUCH = "Touch"
+    UNLIMITED = "Unlimited"
+    SPECIAL = "Special"
 
 
 
@@ -32,8 +39,8 @@ class Spell(db.Entity):
     school = Required(School)
     casting_time_value = Required(int)
     casting_time_unit = Required(CastingTimeUnit)
-    range = Required(str)
-    range = Required(int)
+    range_value = Optional(int)
+    range_unit = Required(RangeUnit)
     components = Required(str)
     description = Required(str)
     classes = Required(str)
@@ -58,3 +65,13 @@ def casting_time_value(self, value):
     if value < 0:
         raise ValueError("Can not cast in negative time!")
     self._casting_time_value = value 
+
+@property
+def range_value(self):
+    return self._range_value
+
+@range_value.setter
+def range_value(self, value):
+    if value is not None and value < 0:
+        raise ValueError("Range can not be negative")
+    self._range_value = value
