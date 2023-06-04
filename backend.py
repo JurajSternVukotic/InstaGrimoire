@@ -41,9 +41,12 @@ class Spell(db.Entity):
     casting_time_unit = Required(CastingTimeUnit)
     range_value = Optional(int)
     range_unit = Required(RangeUnit)
-    components = Required(str)
+    component_v = Required(bool)
+    component_s = Required(bool)
+    component_m = Required(bool)
+    material_description = Optional(str)
     description = Required(str)
-    classes = Required(str)
+    classes = Required(str) # Zbog restrikcije na samo jednu klasu u databaseu, ne mogu zadrzati atomarnost podataka te ce lista klasa biti string poput: "Sorcerer, Warlock, Wizard" pa cu rasclanjivati string za search
 
 
 @property 
@@ -75,3 +78,12 @@ def range_value(self, value):
     if value is not None and value < 0:
         raise ValueError("Range can not be negative")
     self._range_value = value
+
+@property
+def material_description(self):
+    return self._material_description
+
+@material_description.setter
+def material_description(self, value):
+    if self.component_m is False and value is not None:
+        raise ValueError("Material description should be none when there is no material component")
