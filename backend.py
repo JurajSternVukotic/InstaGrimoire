@@ -46,6 +46,7 @@ class Spell(db.Entity):
     component_m = Required(bool)
     material_description = Optional(str)
     description = Required(str)
+    upcast = Optional(str)
     classes = Required(str) # Zbog restrikcije na samo jednu klasu u databaseu, ne mogu zadrzati atomarnost podataka te ce lista klasa biti string poput: "Sorcerer, Warlock, Wizard" pa cu rasclanjivati string za search
 
 
@@ -123,3 +124,21 @@ def material_description(self, value):
 
 db.bind(provider='sqlite', filename='spells.db', create_db=True)
 db.generate_mapping(create_tables=True)
+
+with db_session:
+    new_spell = Spell(
+        name="Magic Missile",
+        level=1,
+        school="Evocation",
+        casting_time_value=1,
+        casting_time_unit="Action",
+        range_value=120,
+        range_unit="Feet",
+        component_v=True,
+        component_s=True,
+        component_m=False,
+        #material_description=,
+        description="You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.",
+        upcast="When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot above 1st.",
+        classes="Wizard",
+    )
