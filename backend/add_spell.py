@@ -1,7 +1,7 @@
 from pony.orm import db_session
 from model import Spell, School, CastingTimeUnit, RangeUnit, connect
 
-connect()
+#connect()
 
 def add_spell():
     new_spell = Spell(
