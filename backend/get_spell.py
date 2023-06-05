@@ -1,6 +1,5 @@
 from pony.orm import db_session
 from model import Spell, connect
-
 #connect()
 
 def get_spell(spell_name):

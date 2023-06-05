@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Required
+from typing import Any, Optional
 from pony.orm import *
 
 db = Database()
