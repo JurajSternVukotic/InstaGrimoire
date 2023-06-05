@@ -18,7 +18,8 @@ def add_spell(spell_data):
             component_m = spell_data["component_m"],
             description = spell_data["description"],
             upcast = spell_data["upcast"],
-            classes = spell_data["classes"]
+            classes = spell_data["classes"],
+            source_book = spell_data["source_book"]
         )
         return new_spell.to_dict() # This will convert the created spell into a dictionary
 

@@ -20,6 +20,7 @@ def get_spell(spell_name):
             print(f"Description: {spell.description}")
             print(f"Upcast: {spell.upcast}")
             print(f"Classes: {spell.classes}")
+            print(f"Sourcebook: {spell.source_book}")
         else:
             print(f"No spell found with name {spell_name}")
 

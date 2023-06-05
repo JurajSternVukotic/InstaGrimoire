@@ -31,7 +31,6 @@ class RangeUnit(Enum):
     SPECIAL = "Special"
 
 
-
 class Spell(db.Entity):
     id = PrimaryKey(int, auto = True)
     name = Required(str, unique = True)
@@ -48,6 +47,7 @@ class Spell(db.Entity):
     description = Required(str)
     upcast = Optional(str)
     classes = Required(str) # Zbog restrikcije na samo jednu klasu u databaseu, ne mogu zadrzati atomarnost podataka te ce lista klasa biti string poput: "Sorcerer, Warlock, Wizard" pa cu rasclanjivati string za search
+    source_book = Required(str)
 
     def set_level(self, value):
         if value < 0 or value > 9:
