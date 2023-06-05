@@ -1,6 +1,5 @@
 # TODO
 ## Features
-    - Add spell sourcebook
     - Add subclass support
     - Add both PUT and PATCH disctinction
     - Filter/sorting by each attribute

@@ -1,0 +1,21 @@
+{
+"name": "Alarm",
+"level": 1,
+"school": "Abjuration",
+"casting_time_value": 1,
+"casting_time_unit": "Minute",
+"range_value": 30,
+"range_unit": "Feet",
+"component_v": true,
+"component_s": true,
+"component_m": true,
+"material_description": "a tiny bell and a piece of fine silver wire",
+"description": "You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won’t set off the alarm. You also choose whether the alarm is mental or audible.\n\nA mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping. An audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.",
+"upcast": null,
+"classes": "Artificer, Ranger, Wizard",
+"source_book": "Player's Handbook"
+}
+
+
+
+
