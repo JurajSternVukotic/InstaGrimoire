@@ -7,3 +7,7 @@
     - Visualisation
     - Frontend
     - Import from files easily
+
+
+
+curl -X POST -H "Content-Type: application/json" -d @Blink.json http://localhost:5000/spell

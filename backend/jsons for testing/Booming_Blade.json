@@ -5,7 +5,7 @@
 "casting_time_value": 1,
 "casting_time_unit": "Action",
 "range_value": null,
-"range_unit": "Self (5-foot radius)",
+"range_unit": "Self",
 "component_v": false,
 "component_s": true,
 "component_m": true,

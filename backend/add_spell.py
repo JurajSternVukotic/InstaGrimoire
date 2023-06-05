@@ -11,16 +11,21 @@ def add_spell(spell_data):
             school = School[spell_data["school"].upper()].value,
             casting_time_value = spell_data["casting_time_value"],
             casting_time_unit = CastingTimeUnit[spell_data["casting_time_unit"].upper()].value,
-            range_value = spell_data["range_value"],
             range_unit = RangeUnit[spell_data["range_unit"].upper()].value,
             component_v = spell_data["component_v"],
             component_s = spell_data["component_s"],
             component_m = spell_data["component_m"],
             description = spell_data["description"],
-            upcast = spell_data["upcast"],
             classes = spell_data["classes"],
             source_book = spell_data["source_book"]
         )
+
+        if 'range_value' in spell_data:
+            new_spell.range_value = spell_data['range_value']
+
+        if 'upcast' in spell_data:
+            new_spell.upcast = spell_data['upcast']
+
         return new_spell.to_dict() # This will convert the created spell into a dictionary
 
 if __name__ == '__main__':
