@@ -1,19 +1,10 @@
-Spell entry:
-
-with db_session:
-    new_spell = Spell(
-        name = "",
-        level =,
-        casting_time_value=,
-        casting_time_unit=,
-        range_value=,
-        range_unit=,
-        component_v=,
-        component_s=,
-        component_m=,
-        material_description=,
-        description=,
-        upcast=,
-        classes=,
-    )
-
+# TODO
+## Features
+    - Add spell sourcebook
+    - Add subclass support
+    - Add both PUT and PATCH disctinction
+    - Filter/sorting by each attribute
+    - Think of way to extract important info from description or just create attributes (shape, size, damage, save...)
+    - Visualisation
+    - Frontend
+    - Import from files easily
