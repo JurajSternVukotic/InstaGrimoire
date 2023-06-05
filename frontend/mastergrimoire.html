@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasterGrimoire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Master Grimoire</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="instantgrimoire.html">Instant Grimoire</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="filter-section">
+            <h2>Filter Spells</h2>
+            <form id="filter-form">
+                <label for="class">Class:</label>
+                <select id="class" name="class">
+                    <option value="any">Any</option>
+                    <option value="artificer">Artificer</option>
+                    <option value="barbarian">Barbarian</option>
+                    <option value="bard">Bard</option>
+                    <option value="cleric">Cleric</option>
+                    <option value="druid">Druid</option>
+                    <option value="fighter">Fighter</option>
+                    <option value="monk">Monk</option>
+                    <option value="paladin">Paladin</option>
+                    <option value="ranger">Ranger</option>
+                    <option value="rogue">Rogue</option>
+                    <option value="sorcerer">Sorcerer</option>
+                    <option value="warlock">Warlock</option>
+                    <option value="wizard">Wizard</option>
+                </select>
+                <br>
+                <label for="level">Level:</label>
+                <select id="level" name="level">
+                    <option value="Any">Any</option>
+                    <option value="0">Cantrip</option>
+                    <option value="1">1st level</option>
+                    <option value="2">2nd level</option>
+                    <option value="3">3rd level</option>
+                    <option value="4">4th level</option>
+                    <option value="5">5th level</option>
+                    <option value="6">6th level</option>
+                    <option value="7">7th level</option>
+                    <option value="8">8th level</option>
+                    <option value="9">9th level</option>
+                </select>
+                <br>
+                <label for="school">School:</label>
+                <select id="school" name="school">
+                    <option value="any">Any</option>
+                    <option value="abjuration">Abjuration</option>
+                    <option value="conjuration">Conjuration</option>
+                    <option value="divination">Divination</option>
+                    <option value="enchantment">Enchantment</option>
+                    <option value="evocation">Evocation</option>
+                    <option value="illusion">Illusion</option>
+                    <option value="necromancy">Necromancy</option>
+                    <option value="transmutation">Transmutation</option>
+                </select>
+                <br>
+                <input type="submit" value="Apply Filters">
+            </form>
+        </section>
+        <section id="spells-section">
+            <h2>Spells</h2>
+            <div id="spells-container">
+                
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Created by Juraj Štern-Vukotić</p>
+    </footer>
+
+</body>
+</html>
