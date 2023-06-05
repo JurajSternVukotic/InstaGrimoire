@@ -80,6 +80,21 @@
     <footer>
         <p>Created by Juraj Štern-Vukotić</p>
     </footer>
-
+    <script>
+        window.onload = function() {
+            fetch('http://localhost:5000/spells')
+            .then(response => response.json())
+            .then(spells => {
+                const spellsContainer = document.getElementById('spells-container');
+                spells.forEach(spell => {
+                    const spellElement = document.createElement('div');
+                    spellElement.textContent = spell.name;
+                    spellsContainer.appendChild(spellElement);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+    
 </body>
 </html>

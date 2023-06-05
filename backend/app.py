@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from model import Spell, School, CastingTimeUnit, RangeUnit, connect
 from add_spell import add_spell
 from get_spell import get_spell
@@ -8,6 +9,7 @@ from pony.orm import db_session, select
 
 
 app = Flask(__name__)
+CORS(app)
 connect()
 
 @app.route('/spell', methods=['POST'])
