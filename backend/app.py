@@ -33,7 +33,7 @@ def delete_spell_route(name):
     delete_spell(name)
     return '', 204
 
-@app.route('/spell/<name>', methods=['PUT'])
+@app.route('/spell/<name>', methods=['PATCH'])
 def update_spell_route(name):
     data = request.get_json()
     update_spell(name, data)
