@@ -19,7 +19,7 @@
             border-radius: 10px; 
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); 
             width: 80%;
-            max-width: 1500px; 
+            max-width: 1700px; 
             margin: 0 auto; 
             overflow: auto;
         }
@@ -126,6 +126,38 @@
             border-left: none;
         }
 
+        .filter-options {
+            background-color: lightblue;
+            width: 16.66%;
+            padding: 0 20px;
+}
+
+        #filters {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #filters label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        #filters input[type="text"],
+        #filters select {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        
+        #filters input[type="checkbox"] {
+            margin-top: 10px;
+        }
+        
+        #filters input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 1em;
+        }
 
 
 
@@ -140,7 +172,46 @@
         </div>
     
         <div class="main">
-            <div class="filter-options">Filter Options</div>
+            <div class="filter-options">
+                <form id="filters">
+                    <h3>Filter Options</h3>
+            
+                    <label for="id">ID</label>
+                    <input type="text" id="id" name="id">
+            
+                    <label for="sourcebook">Sourcebook</label>
+                    <select id="sourcebook" name="sourcebook">
+                        <option value="">Select a sourcebook</option>
+                    </select>
+            
+                    <label for="casting-time">Casting Time</label>
+                    <select id="casting-time" name="casting-time">
+                        <option value="">Select a casting time</option>
+                    </select>
+            
+                    <label for="range">Range</label>
+                    <input type="text" id="range" name="range">
+            
+                    <label for="components">Components</label>
+                    <input type="checkbox" id="verbal" name="components" value="verbal">
+                    <label for="verbal">Verbal</label>
+                    <input type="checkbox" id="somatic" name="components" value="somatic">
+                    <label for="somatic">Somatic</label>
+                    <input type="checkbox" id="material" name="components" value="material">
+                    <label for="material">Material</label>
+            
+                    <input type="checkbox" id="ritual" name="ritual">
+                    <label for="ritual">Is a Ritual</label>
+            
+                    <input type="checkbox" id="concentration" name="concentration">
+                    <label for="concentration">Requires Concentration</label>
+            
+                    <input type="checkbox" id="upcast" name="upcast">
+                    <label for="upcast">Can be Upcast</label>
+            
+                    <input type="submit" value="Apply Filters">
+                </form>
+            </div>
             <div class="spell-list">Spell List</div>
             <div class="spell-detail">Spell Detail</div>
         </div>
