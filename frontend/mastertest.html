@@ -159,7 +159,7 @@
             font-size: 1em;
         }
        
-        #components {
+        #componentsFilter {
             margin-top: 25px;
             width: 100%;
             text-align: center;
@@ -167,22 +167,22 @@
             margin-bottom: 20px;
         }
 
-        #components thead th {
+        #componentsFilter thead th {
             background-color: #555;
             color: #fff;
             padding: 10px;
         }
 
-        #components tr {
+        #componentsFilter tr {
             border: 3px solid #555;
         }
 
-        #components td {
+        #componentsFilter td {
             border: 3px solid #555;
             padding: 10px;
         }
 
-        #components input[type="checkbox"] {
+        #componentsFilter input[type="checkbox"] {
             margin-left: auto;
             margin-right: auto;
         }
@@ -431,7 +431,7 @@
                         <input type="text" id="range-unit" name="range-unit" placeholder="Unit">
                     </div>
                     
-                    <table id="components">
+                    <table id="componentsFilter">
                         <thead>
                             <tr>
                                 <th colspan="3">Components</th>
@@ -482,33 +482,31 @@
                 <h2 id="spellName">Spell Name</h2>
                 <table>
                     <tr>
-                        <td>Level</td>
+                        <td>Level: </td>
                         <td id="spellLevel">0</td>
                     </tr>
                     <tr>
-                        <td>School</td>
+                        <td>School: </td>
                         <td id="spellSchool">N/A</td>
                     </tr>
                     <tr>
-                        <td>Casting Time</td>
-                        <td id="castingTimeValue">N/A</td>
-                        <td id="castingTimeUnit">N/A</td>
+                        <td>Casting Time: </td>
+                        <td ><span id="castingTimeValue">N/A</span> <span id="castingTimeUnit">N/A</span></td>
                     </tr>
                     <tr>
-                        <td>Range</td>
-                        <td id="rangeValue">N/A</td>
-                        <td id="rangeUnit">N/A</td>
+                        <td>Range: </td>
+                        <td ><span id="rangeValue">N/A</span> <span id="rangeUnit">N/A</span></td>
                     </tr>
                     <tr>
-                        <td>Components</td>
+                        <td>Components: </td>
                         <td id="components">N/A</td>
                     </tr>
                     <tr>
-                        <td>Material Description</td>
+                        <td>Material Description: </td>
                         <td id="materialDescription">N/A</td>
                     </tr>
                     <tr>
-                        <td>Source Book</td>
+                        <td>Source Book: </td>
                         <td id="sourceBook">N/A</td>
                     </tr>
                 </table>
@@ -607,7 +605,10 @@ function getSpellDetails(name) {
     fetch(`http://localhost:5000/spell/${name}`)
     .then((response) => response.json())
     .then((spell) => {
-        console.log(spell); 
+        const classesList = document.getElementById("classesList");
+        while (classesList.firstChild) {
+            classesList.removeChild(classesList.firstChild);
+        }
         document.getElementById("spellName").textContent = spell.name;
         document.getElementById("spellLevel").textContent = spell.level;
         document.getElementById("spellSchool").textContent = spell.school;
@@ -616,28 +617,32 @@ function getSpellDetails(name) {
         document.getElementById("rangeValue").textContent = spell.range_value;
         document.getElementById("rangeUnit").textContent = spell.range_unit;
         document.getElementById("components").textContent = getComponents(spell);
-        document.getElementById("materialDescription").textContent = spell.component_m;
+        document.getElementById("materialDescription").textContent = spell.component_m ? spell.material_description : "None";
         document.getElementById("sourceBook").textContent = spell.source_book;
         document.getElementById("description").textContent = spell.description;
         document.getElementById("upcast").textContent = spell.upcast;
 
-        const classesList = document.getElementById("classesList");
-        classesList.innerHTML = "";
-        spell.classes.forEach((className) => {
-            const listItem = document.createElement("li");
-            listItem.textContent = className;
-            classesList.appendChild(listItem);
-        });
+        function getComponents(spell) {
+            let components = "";
+            if (spell.component_v) components += "V ";
+            if (spell.component_s) components += "S ";
+            if (spell.component_m) components += "M";
+            return components.trim();
+        }
+
+        if (spell.classes) {
+            spell.classes.split(",").forEach((className) => {
+                const listItem = document.createElement("li");
+                listItem.textContent = className.trim();
+                classesList.appendChild(listItem);
+            });
+        }       
     });
+
+    
 }
 
-function getComponents(spell) {
-    let components = "";
-    if (spell.component_v) components += "V ";
-    if (spell.component_s) components += "S ";
-    if (spell.component_m) components += "M";
-    return components.trim();
-}
+
         </script>
         
 
