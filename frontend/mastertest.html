@@ -291,6 +291,19 @@
             display: inline-block;
         }
 
+        .search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #filter-button,
+        .edit-button,
+        .delete-button {
+            margin-left: 10px;
+        }
+
+
 
     </style>
 </head>
@@ -421,6 +434,7 @@
             <div class="spell-list">
                 <div class="search">
                     <input type="text" id="spell-name" name="spell-name" placeholder="Spell Name">
+                    <button id="filter-button">Filter!</button>
                     <div id="results">Results: 0</div>
                 </div>
             
@@ -474,15 +488,31 @@
                     const spellSchool = document.createElement('span');
                     spellSchool.className = 'spell-school';
                     spellSchool.textContent = spell.school;
-        
+
                     spellDiv.appendChild(spellName);
                     spellDiv.appendChild(spellLevel);
                     spellDiv.appendChild(spellSchool);
+                    
+                    const editButton = document.createElement('button');
+                    editButton.className = 'edit-button';
+                    editButton.textContent = 'Edit';
+                    spellDiv.appendChild(editButton);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'delete-button';
+                    deleteButton.textContent = 'Delete';
+                    spellDiv.appendChild(deleteButton);
         
                     spellsContainer.appendChild(spellDiv);
+                    const resultsCounter = document.getElementById('results');
+                    resultsCounter.textContent = `${data.length} results`;
                 }
             });
+
+
         }
+
+
         </script>
         
 
