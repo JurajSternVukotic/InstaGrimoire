@@ -21,7 +21,11 @@ def add_spell_route():
 @app.route('/spell/<name>', methods=['GET'])
 def get_spell_route(name):
     spell = get_spell(name)
-    return jsonify(spell), 200
+    if spell is not None:
+        return jsonify(spell), 200
+    else:
+        return jsonify({"error": "No spell found with the provided name"}), 404
+
 
 @app.route('/spells', methods=['GET'])
 @db_session

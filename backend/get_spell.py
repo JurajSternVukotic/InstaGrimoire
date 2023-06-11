@@ -6,22 +6,24 @@ def get_spell(spell_name):
     with db_session:
         spell = Spell.get(name=spell_name)
         if spell is not None:
-            print(f"Name: {spell.name}")
-            print(f"Level: {spell.level}")
-            print(f"School: {spell.school}")
-            print(f"Casting Time Value: {spell.casting_time_value}")
-            print(f"Casting Time Unit: {spell.casting_time_unit}")
-            print(f"Range Value: {spell.range_value}")
-            print(f"Range Unit: {spell.range_unit}")
-            print(f"Component V: {spell.component_v}")
-            print(f"Component S: {spell.component_s}")
-            print(f"Component M: {spell.component_m}")
-            print(f"Description: {spell.description}")
-            print(f"Upcast: {spell.upcast}")
-            print(f"Classes: {spell.classes}")
-            print(f"Sourcebook: {spell.source_book}")
+            return {
+                "name": spell.name,
+                "level": spell.level,
+                "school": spell.school,
+                "casting_time_value": spell.casting_time_value,
+                "casting_time_unit": spell.casting_time_unit,
+                "range_value": spell.range_value,
+                "range_unit": spell.range_unit,
+                "component_v": spell.component_v,
+                "component_s": spell.component_s,
+                "component_m": spell.component_m,
+                "description": spell.description,
+                "upcast": spell.upcast,
+                "classes": spell.classes,
+                "source_book": spell.source_book
+            }
         else:
-            print(f"No spell found with name {spell_name}")
+            return None  
 
 
 if __name__ == "__main__":

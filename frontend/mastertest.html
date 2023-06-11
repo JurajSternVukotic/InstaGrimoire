@@ -542,68 +542,102 @@
     </div>
     
     <script>
-        window.onload = function() {
-            fetch('http://localhost:5000/spells')
-            .then(response => response.json())
-            .then(data => {
-                const spellsContainer = document.querySelector('.spells');
+  window.onload = function() {
+    fetch('http://localhost:5000/spells')
+    .then(response => response.json())
+    .then(data => {
+        const spellsContainer = document.querySelector('.spells');
         
-                for (let spell of data) {
-                    const spellDiv = document.createElement('div');
-                    spellDiv.className = 'spell';
-        
-                    const spellName = document.createElement('span');
-                    spellName.className = 'spell-name';
-                    spellName.textContent = spell.name;
-        
-                    const spellLevel = document.createElement('span');
-                    spellLevel.className = 'spell-level';
-                    spellLevel.textContent = `Level ${spell.level}`;
-        
-                    const spellSchool = document.createElement('span');
-                    spellSchool.className = 'spell-school';
-                    spellSchool.textContent = spell.school;
+        for (let spell of data) {
+            const spellDiv = document.createElement('div');
+            spellDiv.className = 'spell';
 
-                    spellDiv.appendChild(spellName);
-                    spellDiv.appendChild(spellLevel);
-                    spellDiv.appendChild(spellSchool);
-                    
-                    const editButton = document.createElement('button');
-                    editButton.className = 'edit-button';
-                    editButton.textContent = 'Edit';
-                    spellDiv.appendChild(editButton);
+            const spellName = document.createElement('span');
+            spellName.className = 'spell-name';
+            spellName.textContent = spell.name;
+            
+            spellName.addEventListener("click", () => getSpellDetails(spell.name));
 
-                    const deleteButton = document.createElement('button');
-                    deleteButton.className = 'delete-button';
-                    deleteButton.textContent = 'Delete';
-                    
-                    deleteButton.addEventListener('click', function() {
-                    fetch(`http://localhost:5000/spell/${spell.name}`, {
-                        method: 'DELETE'
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        spellsContainer.removeChild(spellDiv);
-                    })
-                    .catch(e => {
-                        console.log('There was a problem with the delete request: ' + e.message);
-                    });
+            const spellLevel = document.createElement('span');
+            spellLevel.className = 'spell-level';
+            spellLevel.textContent = `Level ${spell.level}`;
+
+            const spellSchool = document.createElement('span');
+            spellSchool.className = 'spell-school';
+            spellSchool.textContent = spell.school;
+
+            spellDiv.appendChild(spellName);
+            spellDiv.appendChild(spellLevel);
+            spellDiv.appendChild(spellSchool);
+            
+            const editButton = document.createElement('button');
+            editButton.className = 'edit-button';
+            editButton.textContent = 'Edit';
+            spellDiv.appendChild(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.textContent = 'Delete';
+            
+            deleteButton.addEventListener('click', function() {
+                fetch(`http://localhost:5000/spell/${spell.name}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    spellsContainer.removeChild(spellDiv);
+                })
+                .catch(e => {
+                    console.log('There was a problem with the delete request: ' + e.message);
                 });
-                   
-                    spellDiv.appendChild(deleteButton);
-        
-                    spellsContainer.appendChild(spellDiv);
-                    const resultsCounter = document.getElementById('results');
-                    resultsCounter.textContent = `${data.length} results`;
-                }
             });
+               
+            spellDiv.appendChild(deleteButton);
 
-
+            spellsContainer.appendChild(spellDiv);
+            const resultsCounter = document.getElementById('results');
+            resultsCounter.textContent = `${data.length} results`;
         }
+    });
+}
 
+function getSpellDetails(name) {
+    fetch(`http://localhost:5000/spell/${name}`)
+    .then((response) => response.json())
+    .then((spell) => {
+        console.log(spell); 
+        document.getElementById("spellName").textContent = spell.name;
+        document.getElementById("spellLevel").textContent = spell.level;
+        document.getElementById("spellSchool").textContent = spell.school;
+        document.getElementById("castingTimeValue").textContent = spell.casting_time_value;
+        document.getElementById("castingTimeUnit").textContent = spell.casting_time_unit;
+        document.getElementById("rangeValue").textContent = spell.range_value;
+        document.getElementById("rangeUnit").textContent = spell.range_unit;
+        document.getElementById("components").textContent = getComponents(spell);
+        document.getElementById("materialDescription").textContent = spell.component_m;
+        document.getElementById("sourceBook").textContent = spell.source_book;
+        document.getElementById("description").textContent = spell.description;
+        document.getElementById("upcast").textContent = spell.upcast;
 
+        const classesList = document.getElementById("classesList");
+        classesList.innerHTML = "";
+        spell.classes.forEach((className) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = className;
+            classesList.appendChild(listItem);
+        });
+    });
+}
+
+function getComponents(spell) {
+    let components = "";
+    if (spell.component_v) components += "V ";
+    if (spell.component_s) components += "S ";
+    if (spell.component_m) components += "M";
+    return components.trim();
+}
         </script>
         
 
