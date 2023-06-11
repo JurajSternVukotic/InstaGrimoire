@@ -501,6 +501,23 @@
                     const deleteButton = document.createElement('button');
                     deleteButton.className = 'delete-button';
                     deleteButton.textContent = 'Delete';
+                    
+                    deleteButton.addEventListener('click', function() {
+                    fetch(`http://localhost:5000/spell/${spell.name}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        // If delete was successful, remove the spell from the list
+                        spellsContainer.removeChild(spellDiv);
+                    })
+                    .catch(e => {
+                        console.log('There was a problem with the delete request: ' + e.message);
+                    });
+                });
+                   
                     spellDiv.appendChild(deleteButton);
         
                     spellsContainer.appendChild(spellDiv);
