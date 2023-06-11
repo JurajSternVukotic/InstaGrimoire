@@ -562,7 +562,7 @@
                 <div id="action-buttons">
                     <button id="add-button">Add</button>
                     <button id="view-button" disabled>View</button>
-                    <button id="edit-button">Edit</button>
+                    <button id="edit-button-tab">Edit</button>
                 </div>
 
                 <div id="detail-display">
@@ -716,40 +716,11 @@
                         spellDiv.appendChild(spellLevel);
                         spellDiv.appendChild(spellSchool);
 
-                        const editButton = document.createElement('button');
-                        editButton.className = 'edit-button';
-                        editButton.textContent = 'Edit';
-                        spellDiv.appendChild(editButton);
 
-                        editButton.addEventListener('click', function () {
-                            currentSpellName = spell.name;
-                            fetch(`http://localhost:5000/spell/${spell.name}`)
-                                .then(response => response.json())
-                                .then(spell => {
-                                    const spellForm = document.getElementById('add-spell-form');
-                                    spellForm['name'].value = spell.name;
-                                    spellForm['level'].value = spell.level;
-                                    spellForm['school'].value = spell.school;
-                                    spellForm['casting_time_value'].value = spell
-                                    .casting_time_value;
-                                    spellForm['casting_time_unit'].value = spell.casting_time_unit;
-                                    spellForm['range_value'].value = spell.range_value;
-                                    spellForm['range_unit'].value = spell.range_unit;
-                                    spellForm['component_v'].value = spell.component_v;
-                                    spellForm['component_s'].value = spell.component_s;
-                                    spellForm['component_m'].value = spell.component_m;
-                                    spellForm['material_description'].value = spell
-                                        .material_description;
-                                    spellForm['description'].value = spell.description;
-                                    spellForm['upcast'].value = spell.upcast;
-                                    spellForm['classes'].value = spell.classes;
-                                    spellForm['source_book'].value = spell.source_book;
-
-                                });
-                        });
 
                         const deleteButton = document.createElement('button');
-                        deleteButton.className = 'delete-button';
+                        deleteButton.className =
+                            'delete-button';
                         deleteButton.textContent = 'Delete';
 
                         deleteButton.addEventListener('click', function () {
@@ -772,7 +743,8 @@
 
                         spellsContainer.appendChild(spellDiv);
                         const resultsCounter = document.getElementById('results');
-                        resultsCounter.textContent = `${data.length} results`;
+                        resultsCounter.textContent =
+                            `${data.length} results`;
                     }
                 });
         }
@@ -821,6 +793,7 @@
         const viewButton = document.getElementById('view-button');
         const spellDetail = document.getElementById('detail-display');
         const spellForm = document.getElementById('add-spell-form');
+        const editButtonTab = document.getElementById('edit-button-tab')
 
         addButton.addEventListener('click', function () {
             spellDetail.style.display = 'none';
@@ -828,6 +801,8 @@
 
             addButton.disabled = true;
             viewButton.disabled = false;
+            editButtonTab.disabled = false;
+            spellForm.reset();
         });
 
         viewButton.addEventListener('click', function () {
@@ -836,6 +811,41 @@
 
             viewButton.disabled = true;
             addButton.disabled = false;
+            editButtonTab.disabled = false;
+        });
+
+        editButtonTab.addEventListener('click', function () {
+            spellDetail.style.display = 'none';
+            spellForm.style.display = 'block';
+
+            addButton.disabled = false;
+            viewButton.disabled = false;
+            editButtonTab.disabled = true;
+
+
+
+            fetch(`http://localhost:5000/spell/${document.getElementById("spellName").textContent}`)
+                .then(response => response.json())
+                .then(spell => {
+                    const spellForm = document.getElementById('add-spell-form');
+                    spellForm['name'].value = spell.name;
+                    spellForm['level'].value = spell.level;
+                    spellForm['school'].value = spell.school;
+                    spellForm['casting_time_value'].value = spell.casting_time_value;
+                    spellForm['casting_time_unit'].value = spell.casting_time_unit;
+                    spellForm['range_value'].value = spell.range_value;
+                    spellForm['range_unit'].value = spell.range_unit;
+                    spellForm['component_v'].value = spell.component_v;
+                    spellForm['component_s'].value = spell.component_s;
+                    spellForm['component_m'].value = spell.component_m;
+                    spellForm['material_description'].value = spell.material_description;
+                    spellForm['description'].value = spell.description;
+                    spellForm['upcast'].value = spell.upcast;
+                    spellForm['classes'].value = spell.classes;
+                    spellForm['source_book'].value = spell.source_book;
+
+                });
+
         });
 
 
