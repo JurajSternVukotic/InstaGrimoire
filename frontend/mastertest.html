@@ -216,13 +216,46 @@
             width: 50px;
             height: 30px;
         } 
+
+        .title-nav {
+           background-color: lightblue;
+           width: 25%;
+           height: 100%;
+           display: flex;
+           flex-direction: column; 
+           justify-content: center;
+           align-items: center;
+           padding: 0 20px;
+        }
+
+        title-nav h1 {
+           margin-bottom: 15px; 
+        }
+
+        title-nav nav a {
+           margin-right: 10px; 
+           text-decoration: none; 
+           color: #333; 
+        }
+
+        title-nav nav a:last-child {
+           margin-right: 0; 
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="header">
-            <div class="title-nav">Title and Navigation</div>
+            <div class="title-nav">
+                <h1>Master Grimoire</h1>
+                <nav>
+                    <a href="index.html">Home Page</a>
+                    <a href="instantgrimoire.html">Instant Grimoire</a>
+                </nav>
+            </div>
+            
             <div class="form-selection">Form Selection</div>
         </div>
     
