@@ -303,6 +303,42 @@
             margin-left: 10px;
         }
 
+        .spell-detail {
+            background-color: lightgrey;
+            width: 33.33%; 
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spell-detail h2 {
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        .spell-detail table {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .spell-detail table td {
+            padding: 5px;
+        }
+
+        .spell-detail p, .spell-detail h3, .spell-detail ul {
+            width: 100%;
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .spell-detail ul {
+            list-style: none;
+            padding-left: 0;
+        }
 
 
     </style>
@@ -442,7 +478,46 @@
                 </div>
             </div>
             
-            <div class="spell-detail">Spell Detail</div>
+            <div class="spell-detail">
+                <h2 id="spellName">Spell Name</h2>
+                <table>
+                    <tr>
+                        <td>Level</td>
+                        <td id="spellLevel">0</td>
+                    </tr>
+                    <tr>
+                        <td>School</td>
+                        <td id="spellSchool">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Casting Time</td>
+                        <td id="castingTimeValue">N/A</td>
+                        <td id="castingTimeUnit">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Range</td>
+                        <td id="rangeValue">N/A</td>
+                        <td id="rangeUnit">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Components</td>
+                        <td id="components">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Material Description</td>
+                        <td id="materialDescription">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Source Book</td>
+                        <td id="sourceBook">N/A</td>
+                    </tr>
+                </table>
+                <p id="description">N/A</p>
+                <h3>At higher levels:</h3>
+                <p id="upcast">N/A</p>
+                <h3>Classes:</h3>
+                <ul id="classesList"></ul>
+            </div>
         </div>
     
         <div class="footer">
@@ -510,7 +585,6 @@
                         if (!response.ok) {
                             throw new Error(`HTTP error! status: ${response.status}`);
                         }
-                        // If delete was successful, remove the spell from the list
                         spellsContainer.removeChild(spellDiv);
                     })
                     .catch(e => {
