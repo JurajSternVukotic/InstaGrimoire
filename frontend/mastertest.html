@@ -242,6 +242,56 @@
            margin-right: 0; 
         }
 
+        .form-selection table {
+            border-collapse: collapse;
+        }
+
+        .form-selection th, .form-selection td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .form-selection th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .spell-list {
+            background-color: lightpink;
+            width: 50%; 
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .search {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        #results {
+            align-self: center;
+        }
+
+        .spells {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spell {
+            border: 1px solid #000;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .spell-name, .spell-level, .spell-school {
+            display: inline-block;
+        }
+
+
     </style>
 </head>
 <body>
@@ -253,10 +303,48 @@
                 <nav>
                     <a href="index.html">Home Page</a>
                     <a href="instantgrimoire.html">Instant Grimoire</a>
+                    <a href="help.html">Help</a>
                 </nav>
             </div>
             
-            <div class="form-selection">Form Selection</div>
+            <div class="form-selection">
+                <table>
+                    <tr>
+                        <th>Class</th>
+                        <th>Artificer</th>
+                        <th>Barbarian</th>
+                        <th>Bard</th>
+                        <th>Cleric</th>
+                        <th>Druid</th>
+                        <th>Fighter</th>
+                        <th>Monk</th>
+                        <th>Paladin</th>
+                        <th>Ranger</th>
+                        <th>Rogue</th>
+                        <th>Sorcerer</th>
+                        <th>Warlock</th>
+                        <th>Wizard</th>
+                    </tr>
+                    <tr>
+                        <td>Select</td>
+                        <td><input type="checkbox" name="class" id="artificer"></td>
+                        <td><input type="checkbox" name="class" id="barbarian"></td>
+                        <td><input type="checkbox" name="class" id="bard"></td>
+                        <td><input type="checkbox" name="class" id="cleric"></td>
+                        <td><input type="checkbox" name="class" id="druid"></td>
+                        <td><input type="checkbox" name="class" id="fighter"></td>
+                        <td><input type="checkbox" name="class" id="monk"></td>
+                        <td><input type="checkbox" name="class" id="paladin"></td>
+                        <td><input type="checkbox" name="class" id="ranger"></td>
+                        <td><input type="checkbox" name="class" id="rogue"></td>
+                        <td><input type="checkbox" name="class" id="sorcerer"></td>
+                        <td><input type="checkbox" name="class" id="warlock"></td>
+                        <td><input type="checkbox" name="class" id="wizard"></td>
+                    </tr>
+
+                </table>
+</div>
+
         </div>
     
         <div class="main">
@@ -330,7 +418,30 @@
                     <input type="submit" value="Apply Filters">
                 </form>
             </div>
-            <div class="spell-list">Spell List</div>
+            <div class="spell-list">
+                <div class="search">
+                    <input type="text" id="spell-name" name="spell-name" placeholder="Spell Name">
+                    <div id="results">Results: 0</div>
+                </div>
+            
+                <div class="spells">
+                    <div class="spell">
+                        <span class="spell-name">Spell 1</span>
+                        <span class="spell-level">Level 1</span>
+                        <span class="spell-school">School 1</span>
+                        <span class="spell-edit">Edit</span>
+                        <span class="spell-delete">Delete</span>
+                    </div>
+                    <div class="spell">
+                        <span class="spell-name">Spell 2</span>
+                        <span class="spell-level">Level 2</span>
+                        <span class="spell-school">School 2</span>
+                        <span class="spell-edit">Edit</span>
+                        <span class="spell-delete">Delete</span>
+                    </div>
+                </div>
+            </div>
+            
             <div class="spell-detail">Spell Detail</div>
         </div>
     
