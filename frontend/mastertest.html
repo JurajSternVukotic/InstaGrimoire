@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
         body {
@@ -15,15 +16,18 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9); 
-            border-radius: 10px; 
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); 
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
             width: 80%;
-            max-width: 1700px; 
-            margin: 0 auto; 
+            max-width: 1700px;
+            margin: 0 auto;
             overflow: auto;
         }
-        .header, .main, .footer {
+
+        .header,
+        .main,
+        .footer {
             width: 100%;
         }
 
@@ -55,48 +59,49 @@
 
         .main {
             display: flex;
-            height: calc(100vh - 180px); 
+            height: calc(100vh - 180px);
         }
 
         .filter-options {
             background-color: lightblue;
-            width: 16.66%; 
+            width: 16.66%;
             padding: 0 20px;
         }
 
         .spell-list {
             background-color: lightpink;
-            width: 50%; 
+            width: 50%;
             padding: 0 20px;
         }
 
-        .spell-detail {
+        .spell-detail,
+        #spell-form {
             background-color: lightgrey;
-            width: 33.33%; 
+            width: 33.33%;
             padding: 0 20px;
         }
 
         .footer {
-            background-color: rgba(0, 0, 0, 0.5); 
-            height: 65px; 
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 65px;
             display: flex;
-            justify-content: space-between; 
+            justify-content: space-between;
             align-items: center;
             padding: 0 10px;
-            color: #fff; 
+            color: #fff;
             font-size: medium;
         }
 
         .footer img {
-            height: 50px; 
+            height: 50px;
         }
-        
+
         .footer div {
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative; 
-            padding: 0 20px; 
+            position: relative;
+            padding: 0 20px;
         }
 
         .footer div::before {
@@ -105,7 +110,7 @@
             left: 0;
             top: 10px;
             bottom: 10px;
-            border-left: 1px solid white; 
+            border-left: 1px solid white;
         }
 
 
@@ -115,7 +120,7 @@
             right: 0;
             top: 10px;
             bottom: 10px;
-            border-right: 1px solid white; 
+            border-right: 1px solid white;
         }
 
         .footer div:last-child::after {
@@ -130,35 +135,35 @@
             background-color: lightblue;
             width: 16.66%;
             padding: 0 20px;
-}
+        }
 
         #filters {
             display: flex;
             flex-direction: column;
         }
-        
+
         #filters label {
             font-weight: bold;
             margin-top: 10px;
         }
-        
+
         #filters input[type="text"],
         #filters select {
             width: 100%;
             padding: 5px;
             margin-top: 5px;
         }
-        
+
         #filters input[type="checkbox"] {
             margin-top: 10px;
         }
-        
+
         #filters input[type="submit"] {
             margin-top: 20px;
             padding: 10px;
             font-size: 1em;
         }
-       
+
         #componentsFilter {
             margin-top: 25px;
             width: 100%;
@@ -190,12 +195,12 @@
 
         .input-group {
             display: grid;
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
         .input-group input {
-            box-sizing: border-box; 
+            box-sizing: border-box;
             padding: 0 5px;
         }
 
@@ -212,41 +217,42 @@
             margin-right: 5px;
         }
 
-        input[type='number']{
+        input[type='number'] {
             width: 50px;
             height: 30px;
-        } 
+        }
 
         .title-nav {
-           background-color: lightblue;
-           width: 25%;
-           height: 100%;
-           display: flex;
-           flex-direction: column; 
-           justify-content: center;
-           align-items: center;
-           padding: 0 20px;
+            background-color: lightblue;
+            width: 25%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
         }
 
         title-nav h1 {
-           margin-bottom: 15px; 
+            margin-bottom: 15px;
         }
 
         title-nav nav a {
-           margin-right: 10px; 
-           text-decoration: none; 
-           color: #333; 
+            margin-right: 10px;
+            text-decoration: none;
+            color: #333;
         }
 
         title-nav nav a:last-child {
-           margin-right: 0; 
+            margin-right: 0;
         }
 
         .form-selection table {
             border-collapse: collapse;
         }
 
-        .form-selection th, .form-selection td {
+        .form-selection th,
+        .form-selection td {
             border: 1px solid #ddd;
             padding: 8px;
         }
@@ -261,7 +267,7 @@
 
         .spell-list {
             background-color: lightpink;
-            width: 50%; 
+            width: 50%;
             padding: 20px;
             overflow-y: auto;
         }
@@ -287,7 +293,9 @@
             padding: 10px;
         }
 
-        .spell-name, .spell-level, .spell-school {
+        .spell-name,
+        .spell-level,
+        .spell-school {
             display: inline-block;
         }
 
@@ -303,9 +311,10 @@
             margin-left: 10px;
         }
 
-        .spell-detail {
+        .spell-detail,
+        #spell-form {
             background-color: lightgrey;
-            width: 33.33%; 
+            width: 33.33%;
             padding: 0 20px;
             display: flex;
             flex-direction: column;
@@ -313,36 +322,103 @@
             align-items: center;
         }
 
-        .spell-detail h2 {
+        .spell-detail h2,
+        #spell-form {
             font-size: 2.5em;
             text-align: center;
         }
 
-        .spell-detail table {
+        .spell-detail table,
+        #spell-form {
             width: 100%;
             text-align: left;
             margin-bottom: 20px;
         }
 
-        .spell-detail table td {
+        .spell-detail table td,
+        #spell-form {
             padding: 5px;
         }
 
-        .spell-detail p, .spell-detail h3, .spell-detail ul {
+        .spell-detail p,
+        .spell-detail h3,
+        .spell-detail ul,
+        #spell-form {
             width: 100%;
             text-align: left;
             margin-top: 0;
             margin-bottom: 20px;
         }
 
-        .spell-detail ul {
+        .spell-detail ul,
+        #spell-form {
             list-style: none;
             padding-left: 0;
         }
 
+        #action-buttons {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
+        #action-buttons button {
+            flex: 1;
+            padding: 10px;
+        }
+
+        #action-buttons button[disabled] {
+            background-color: #ccc;
+        }
+
+        .action-buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #add-spell-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        #add-spell-form label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #add-spell-form input[type="text"],
+        #add-spell-form input[type="number"],
+        #add-spell-form select,
+        #add-spell-form textarea {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        #add-spell-form input[type="submit"] {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        #add-spell-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -355,7 +431,7 @@
                     <a href="help.html">Help</a>
                 </nav>
             </div>
-            
+
             <div class="form-selection">
                 <table>
                     <tr>
@@ -392,18 +468,18 @@
                     </tr>
 
                 </table>
-</div>
+            </div>
 
         </div>
-    
+
         <div class="main">
             <div class="filter-options">
                 <form id="filters">
                     <h3>Filter Options</h3>
-            
+
                     <label for="id">ID</label>
                     <input type="text" id="id" name="id">
-            
+
                     <label for="sourcebook">Sourcebook</label>
                     <select id="sourcebook" name="sourcebook">
                         <option value="">Select a sourcebook</option>
@@ -418,19 +494,20 @@
                     <select id="level" name="level">
                         <option value="">Select a level</option>
                     </select>
-            
+
                     <label>Casting Time</label>
                     <div class="input-group">
-                        <input type="number" id="casting-time-value" name="casting-time-value" min="0" placeholder="Value">
+                        <input type="number" id="casting-time-value" name="casting-time-value" min="0"
+                            placeholder="Value">
                         <input type="text" id="casting-time-unit" name="casting-time-unit" placeholder="Unit">
                     </div>
-            
+
                     <label>Range</label>
                     <div class="input-group">
                         <input type="number" id="range-value" name="range-value" min="0" placeholder="Value">
                         <input type="text" id="range-unit" name="range-unit" placeholder="Unit">
                     </div>
-                    
+
                     <table id="componentsFilter">
                         <thead>
                             <tr>
@@ -453,17 +530,17 @@
                         <label for="ritual">Ritual</label>
                         <input type="checkbox" id="ritual" name="ritual">
                     </div>
-                    
+
                     <div class="checkbox-container">
                         <label for="concentration">Concentration</label>
                         <input type="checkbox" id="concentration" name="concentration">
                     </div>
-                    
+
                     <div class="checkbox-container">
                         <label for="upcast">Upcast</label>
                         <input type="checkbox" id="upcast" name="upcast">
                     </div>
-            
+
                     <input type="submit" value="Apply Filters">
                 </form>
             </div>
@@ -473,54 +550,126 @@
                     <button id="filter-button">Filter!</button>
                     <div id="results">Results: 0</div>
                 </div>
-            
+
+
                 <div class="spells">
                 </div>
             </div>
-            
+
+
             <div class="spell-detail">
-                <h2 id="spellName">Spell Name</h2>
-                <table>
-                    <tr>
-                        <td>Level: </td>
-                        <td id="spellLevel">0</td>
-                    </tr>
-                    <tr>
-                        <td>School: </td>
-                        <td id="spellSchool">N/A</td>
-                    </tr>
-                    <tr>
-                        <td>Casting Time: </td>
-                        <td ><span id="castingTimeValue">N/A</span> <span id="castingTimeUnit">N/A</span></td>
-                    </tr>
-                    <tr>
-                        <td>Range: </td>
-                        <td ><span id="rangeValue">N/A</span> <span id="rangeUnit">N/A</span></td>
-                    </tr>
-                    <tr>
-                        <td>Components: </td>
-                        <td id="components">N/A</td>
-                    </tr>
-                    <tr>
-                        <td>Material Description: </td>
-                        <td id="materialDescription">N/A</td>
-                    </tr>
-                    <tr>
-                        <td>Source Book: </td>
-                        <td id="sourceBook">N/A</td>
-                    </tr>
-                </table>
-                <p id="description">N/A</p>
-                <h3>At higher levels:</h3>
-                <p id="upcast">N/A</p>
-                <h3>Classes:</h3>
-                <ul id="classesList"></ul>
+
+                <div id="action-buttons">
+                    <button id="add-button">Add</button>
+                    <button id="view-button" disabled>View</button>
+                    <button id="edit-button">Edit</button>
+                </div>
+
+                <div id="detail-display">
+                    <h2 id="spellName">Spell Name</h2>
+                    <table>
+                        <tr>
+                            <td>Level: </td>
+                            <td id="spellLevel">0</td>
+                        </tr>
+                        <tr>
+                            <td>School: </td>
+                            <td id="spellSchool">N/A</td>
+                        </tr>
+                        <tr>
+                            <td>Casting Time: </td>
+                            <td><span id="castingTimeValue">N/A</span> <span id="castingTimeUnit">N/A</span></td>
+                        </tr>
+                        <tr>
+                            <td>Range: </td>
+                            <td><span id="rangeValue">N/A</span> <span id="rangeUnit">N/A</span></td>
+                        </tr>
+                        <tr>
+                            <td>Components: </td>
+                            <td id="components">N/A</td>
+                        </tr>
+                        <tr>
+                            <td>Material Description: </td>
+                            <td id="materialDescription">N/A</td>
+                        </tr>
+                        <tr>
+                            <td>Source Book: </td>
+                            <td id="sourceBook">N/A</td>
+                        </tr>
+                    </table>
+                    <p id="description">N/A</p>
+                    <h3>At higher levels:</h3>
+                    <p id="upcast">N/A</p>
+                    <h3>Classes:</h3>
+                    <ul id="classesList"></ul>
+                </div>
+
+                <form id="add-spell-form" style="display: none">
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name"><br>
+                    <label for="level">Level:</label><br>
+                    <input type="number" id="level" name="level"><br>
+                    <label for="school">School:</label><br>
+                    <select id="school" name="school">
+                        <option value="Abjuration">Abjuration</option>
+                        <option value="Conjuration">Conjuration</option>
+                        <option value="Divination">Divination</option>
+                        <option value="Enchantment">Enchantment</option>
+                        <option value="Evocation">Evocation</option>
+                        <option value="Illusion">Illusion</option>
+                        <option value="Necromancy">Necromancy</option>
+                        <option value="Transmutation">Transmutation</option>
+                    </select><br>
+                    <label for="casting_time_value">Casting Time Value:</label><br>
+                    <input type="number" id="casting_time_value" name="casting_time_value"><br>
+                    <label for="casting_time_unit">Casting Time Unit:</label><br>
+                    <select id="casting_time_unit" name="casting_time_unit">
+                        <option value="Action">Action</option>
+                        <option value="Bonus Action">Bonus Action</option>
+                        <option value="Reaction">Reaction</option>
+                        <option value="Special">Special</option>
+                        <option value="Minute">Minute</option>
+                        <option value="Hour">Hour</option>
+                    </select><br>
+                    <label for="range_value">Range Value:</label><br>
+                    <input type="number" id="range_value" name="range_value"><br>
+                    <label for="range_unit">Range Unit:</label><br>
+                    <select id="range_unit" name="range_unit">
+                        <option value="Feet">Feet</option>
+                        <option value="Miles">Miles</option>
+                        <option value="Self">Self</option>
+                        <option value="Touch">Touch</option>
+                        <option value="Unlimited">Unlimited</option>
+                        <option value="Special">Special</option>
+                    </select><br>
+                    <label for="component_v">Verbal Component:</label><br>
+                    <input type="checkbox" id="component_v" name="component_v"><br>
+                    <label for="component_s">Somatic Component:</label><br>
+                    <input type="checkbox" id="component_s" name="component_s"><br>
+                    <label for="component_m">Material Component:</label><br>
+                    <input type="checkbox" id="component_m" name="component_m"><br>
+                    <label for="material_description">Material Description:</label><br>
+                    <input type="text" id="material_description" name="material_description"><br>
+                    <label for="description">Description:</label><br>
+                    <textarea id="description" name="description"></textarea><br>
+                    <label for="upcast">Upcast:</label><br>
+                    <textarea id="upcast" name="upcast"></textarea><br>
+                    <label for="classes">Classes:</label><br>
+                    <input type="text" id="classes" name="classes"><br>
+                    <label for="source_book">Source Book:</label><br>
+                    <input type="text" id="source_book" name="source_book"><br>
+                    <input type="submit" value="Submit">
+                </form>
+
             </div>
+
         </div>
-    
+
+
         <div class="footer">
             <div>
-                <img src="https://media.discordapp.net/attachments/773704240987635722/1116841660190564372/Untitled.png?width=475&height=460" alt="Logo Fakulteta">
+                <img src="https://media.discordapp.net/attachments/773704240987635722/1116841660190564372/Untitled.png?width=475&height=460"
+                    alt="Logo Fakulteta">
                 <span>Fakultet informatike u Puli</span>
             </div>
             <div>
@@ -538,114 +687,166 @@
             </div>
         </div>
     </div>
-    
     <script>
-  window.onload = function() {
-    fetch('http://localhost:5000/spells')
-    .then(response => response.json())
-    .then(data => {
-        const spellsContainer = document.querySelector('.spells');
-        
-        for (let spell of data) {
-            const spellDiv = document.createElement('div');
-            spellDiv.className = 'spell';
+        window.onload = function () {
+            fetch('http://localhost:5000/spells')
+                .then(response => response.json())
+                .then(data => {
+                    const spellsContainer = document.querySelector('.spells');
 
-            const spellName = document.createElement('span');
-            spellName.className = 'spell-name';
-            spellName.textContent = spell.name;
-            
-            spellName.addEventListener("click", () => getSpellDetails(spell.name));
+                    for (let spell of data) {
+                        const spellDiv = document.createElement('div');
+                        spellDiv.className = 'spell';
 
-            const spellLevel = document.createElement('span');
-            spellLevel.className = 'spell-level';
-            spellLevel.textContent = `Level ${spell.level}`;
+                        const spellName = document.createElement('span');
+                        spellName.className = 'spell-name';
+                        spellName.textContent = spell.name;
 
-            const spellSchool = document.createElement('span');
-            spellSchool.className = 'spell-school';
-            spellSchool.textContent = spell.school;
+                        spellName.addEventListener("click", () => getSpellDetails(spell.name));
 
-            spellDiv.appendChild(spellName);
-            spellDiv.appendChild(spellLevel);
-            spellDiv.appendChild(spellSchool);
-            
-            const editButton = document.createElement('button');
-            editButton.className = 'edit-button';
-            editButton.textContent = 'Edit';
-            spellDiv.appendChild(editButton);
+                        const spellLevel = document.createElement('span');
+                        spellLevel.className = 'spell-level';
+                        spellLevel.textContent = `Level ${spell.level}`;
 
-            const deleteButton = document.createElement('button');
-            deleteButton.className = 'delete-button';
-            deleteButton.textContent = 'Delete';
-            
-            deleteButton.addEventListener('click', function() {
-                fetch(`http://localhost:5000/spell/${spell.name}`, {
-                    method: 'DELETE'
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                        const spellSchool = document.createElement('span');
+                        spellSchool.className = 'spell-school';
+                        spellSchool.textContent = spell.school;
+
+                        spellDiv.appendChild(spellName);
+                        spellDiv.appendChild(spellLevel);
+                        spellDiv.appendChild(spellSchool);
+
+                        const editButton = document.createElement('button');
+                        editButton.className = 'edit-button';
+                        editButton.textContent = 'Edit';
+                        spellDiv.appendChild(editButton);
+
+                        const deleteButton = document.createElement('button');
+                        deleteButton.className = 'delete-button';
+                        deleteButton.textContent = 'Delete';
+
+                        deleteButton.addEventListener('click', function () {
+                            fetch(`http://localhost:5000/spell/${spell.name}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+                                    spellsContainer.removeChild(spellDiv);
+                                })
+                                .catch(e => {
+                                    console.log('There was a problem with the delete request: ' + e
+                                        .message);
+                                });
+                        });
+
+                        spellDiv.appendChild(deleteButton);
+
+                        spellsContainer.appendChild(spellDiv);
+                        const resultsCounter = document.getElementById('results');
+                        resultsCounter.textContent = `${data.length} results`;
                     }
-                    spellsContainer.removeChild(spellDiv);
-                })
-                .catch(e => {
-                    console.log('There was a problem with the delete request: ' + e.message);
                 });
-            });
-               
-            spellDiv.appendChild(deleteButton);
-
-            spellsContainer.appendChild(spellDiv);
-            const resultsCounter = document.getElementById('results');
-            resultsCounter.textContent = `${data.length} results`;
-        }
-    });
-}
-
-function getSpellDetails(name) {
-    fetch(`http://localhost:5000/spell/${name}`)
-    .then((response) => response.json())
-    .then((spell) => {
-        const classesList = document.getElementById("classesList");
-        while (classesList.firstChild) {
-            classesList.removeChild(classesList.firstChild);
-        }
-        document.getElementById("spellName").textContent = spell.name;
-        document.getElementById("spellLevel").textContent = spell.level;
-        document.getElementById("spellSchool").textContent = spell.school;
-        document.getElementById("castingTimeValue").textContent = spell.casting_time_value;
-        document.getElementById("castingTimeUnit").textContent = spell.casting_time_unit;
-        document.getElementById("rangeValue").textContent = spell.range_value;
-        document.getElementById("rangeUnit").textContent = spell.range_unit;
-        document.getElementById("components").textContent = getComponents(spell);
-        document.getElementById("materialDescription").textContent = spell.component_m ? spell.material_description : "None";
-        document.getElementById("sourceBook").textContent = spell.source_book;
-        document.getElementById("description").textContent = spell.description;
-        document.getElementById("upcast").textContent = spell.upcast;
-
-        function getComponents(spell) {
-            let components = "";
-            if (spell.component_v) components += "V ";
-            if (spell.component_s) components += "S ";
-            if (spell.component_m) components += "M";
-            return components.trim();
         }
 
-        if (spell.classes) {
-            spell.classes.split(",").forEach((className) => {
-                const listItem = document.createElement("li");
-                listItem.textContent = className.trim();
-                classesList.appendChild(listItem);
-            });
-        }       
-    });
+        function getSpellDetails(name) {
+            fetch(`http://localhost:5000/spell/${name}`)
+                .then((response) => response.json())
+                .then((spell) => {
+                    const classesList = document.getElementById("classesList");
+                    while (classesList.firstChild) {
+                        classesList.removeChild(classesList.firstChild);
+                    }
+                    document.getElementById("spellName").textContent = spell.name;
+                    document.getElementById("spellLevel").textContent = spell.level;
+                    document.getElementById("spellSchool").textContent = spell.school;
+                    document.getElementById("castingTimeValue").textContent = spell.casting_time_value;
+                    document.getElementById("castingTimeUnit").textContent = spell.casting_time_unit;
+                    document.getElementById("rangeValue").textContent = spell.range_value;
+                    document.getElementById("rangeUnit").textContent = spell.range_unit;
+                    document.getElementById("components").textContent = getComponents(spell);
+                    document.getElementById("materialDescription").textContent = spell.component_m ? spell
+                        .material_description : "None";
+                    document.getElementById("sourceBook").textContent = spell.source_book;
+                    document.getElementById("description").textContent = spell.description;
+                    document.getElementById("upcast").textContent = spell.upcast;
 
-    
-}
+                    function getComponents(spell) {
+                        let components = "";
+                        if (spell.component_v) components += "V ";
+                        if (spell.component_s) components += "S ";
+                        if (spell.component_m) components += "M";
+                        return components.trim();
+                    }
+
+                    if (spell.classes) {
+                        spell.classes.split(",").forEach((className) => {
+                            const listItem = document.createElement("li");
+                            listItem.textContent = className.trim();
+                            classesList.appendChild(listItem);
+                        });
+                    }
+                });
+        }
+
+        const addButton = document.getElementById('add-button');
+        const viewButton = document.getElementById('view-button');
+        const spellDetail = document.getElementById('detail-display');
+        const spellForm = document.getElementById('add-spell-form');
+
+        addButton.addEventListener('click', function () {
+            spellDetail.style.display = 'none';
+            spellForm.style.display = 'block';
+
+            addButton.disabled = true;
+            viewButton.disabled = false;
+        });
+
+        viewButton.addEventListener('click', function () {
+            spellForm.style.display = 'none';
+            spellDetail.style.display = 'block';
+
+            viewButton.disabled = true;
+            addButton.disabled = false;
+        });
 
 
-        </script>
-        
+        spellForm.addEventListener('submit', function (event) {
+            event.preventDefault();
 
-    </body>
-    </html>
-    
+            let formData = new FormData(spellForm);
+
+            let jsonObject = {};
+
+            for (const [key, value] of formData.entries()) {
+                jsonObject[key] = value;
+            }
+
+            jsonObject.component_v = spellForm['component_v'].checked;
+            jsonObject.component_s = spellForm['component_s'].checked;
+            jsonObject.component_m = spellForm['component_m'].checked;
+
+
+
+            fetch('http://localhost:5000/spell', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonObject)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+
+
+</body>
+
+</html>

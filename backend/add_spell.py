@@ -26,7 +26,7 @@ def add_spell(spell_data):
         if 'upcast' in spell_data:
             new_spell.upcast = spell_data['upcast']
 
-        return new_spell.to_dict() # This will convert the created spell into a dictionary
+        return new_spell.to_dict()
 
 if __name__ == '__main__':
     spell_data = {
