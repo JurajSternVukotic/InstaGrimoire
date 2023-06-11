@@ -721,6 +721,33 @@
                         editButton.textContent = 'Edit';
                         spellDiv.appendChild(editButton);
 
+                        editButton.addEventListener('click', function () {
+                            currentSpellName = spell.name;
+                            fetch(`http://localhost:5000/spell/${spell.name}`)
+                                .then(response => response.json())
+                                .then(spell => {
+                                    const spellForm = document.getElementById('add-spell-form');
+                                    spellForm['name'].value = spell.name;
+                                    spellForm['level'].value = spell.level;
+                                    spellForm['school'].value = spell.school;
+                                    spellForm['casting_time_value'].value = spell
+                                    .casting_time_value;
+                                    spellForm['casting_time_unit'].value = spell.casting_time_unit;
+                                    spellForm['range_value'].value = spell.range_value;
+                                    spellForm['range_unit'].value = spell.range_unit;
+                                    spellForm['component_v'].value = spell.component_v;
+                                    spellForm['component_s'].value = spell.component_s;
+                                    spellForm['component_m'].value = spell.component_m;
+                                    spellForm['material_description'].value = spell
+                                        .material_description;
+                                    spellForm['description'].value = spell.description;
+                                    spellForm['upcast'].value = spell.upcast;
+                                    spellForm['classes'].value = spell.classes;
+                                    spellForm['source_book'].value = spell.source_book;
+
+                                });
+                        });
+
                         const deleteButton = document.createElement('button');
                         deleteButton.className = 'delete-button';
                         deleteButton.textContent = 'Delete';
