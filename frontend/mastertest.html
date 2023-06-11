@@ -425,20 +425,6 @@
                 </div>
             
                 <div class="spells">
-                    <div class="spell">
-                        <span class="spell-name">Spell 1</span>
-                        <span class="spell-level">Level 1</span>
-                        <span class="spell-school">School 1</span>
-                        <span class="spell-edit">Edit</span>
-                        <span class="spell-delete">Delete</span>
-                    </div>
-                    <div class="spell">
-                        <span class="spell-name">Spell 2</span>
-                        <span class="spell-level">Level 2</span>
-                        <span class="spell-school">School 2</span>
-                        <span class="spell-edit">Edit</span>
-                        <span class="spell-delete">Delete</span>
-                    </div>
                 </div>
             </div>
             
@@ -466,7 +452,40 @@
         </div>
     </div>
     
-    
+    <script>
+        window.onload = function() {
+            fetch('http://localhost:5000/spells')
+            .then(response => response.json())
+            .then(data => {
+                const spellsContainer = document.querySelector('.spells');
+        
+                for (let spell of data) {
+                    const spellDiv = document.createElement('div');
+                    spellDiv.className = 'spell';
+        
+                    const spellName = document.createElement('span');
+                    spellName.className = 'spell-name';
+                    spellName.textContent = spell.name;
+        
+                    const spellLevel = document.createElement('span');
+                    spellLevel.className = 'spell-level';
+                    spellLevel.textContent = `Level ${spell.level}`;
+        
+                    const spellSchool = document.createElement('span');
+                    spellSchool.className = 'spell-school';
+                    spellSchool.textContent = spell.school;
+        
+                    spellDiv.appendChild(spellName);
+                    spellDiv.appendChild(spellLevel);
+                    spellDiv.appendChild(spellSchool);
+        
+                    spellsContainer.appendChild(spellDiv);
+                }
+            });
+        }
+        </script>
+        
+
     </body>
     </html>
     
