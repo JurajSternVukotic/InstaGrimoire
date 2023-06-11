@@ -158,9 +158,64 @@
             padding: 10px;
             font-size: 1em;
         }
+       
+        #components {
+            margin-top: 25px;
+            width: 100%;
+            text-align: center;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        #components thead th {
+            background-color: #555;
+            color: #fff;
+            padding: 10px;
+        }
+
+        #components tr {
+            border: 3px solid #555;
+        }
+
+        #components td {
+            border: 3px solid #555;
+            padding: 10px;
+        }
+
+        #components input[type="checkbox"] {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+        }
+
+        .input-group input {
+            box-sizing: border-box; 
+            padding: 0 5px;
+        }
 
 
 
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        input[type='number']{
+            width: 50px;
+            height: 30px;
+        } 
     </style>
 </head>
 <body>
@@ -184,30 +239,50 @@
                         <option value="">Select a sourcebook</option>
                     </select>
             
-                    <label for="casting-time">Casting Time</label>
-                    <select id="casting-time" name="casting-time">
-                        <option value="">Select a casting time</option>
-                    </select>
+                    <label>Casting Time</label>
+                    <div class="input-group">
+                        <input type="number" id="casting-time-value" name="casting-time-value" min="0" placeholder="Value">
+                        <input type="text" id="casting-time-unit" name="casting-time-unit" placeholder="Unit">
+                    </div>
             
-                    <label for="range">Range</label>
-                    <input type="text" id="range" name="range">
-            
-                    <label for="components">Components</label>
-                    <input type="checkbox" id="verbal" name="components" value="verbal">
-                    <label for="verbal">Verbal</label>
-                    <input type="checkbox" id="somatic" name="components" value="somatic">
-                    <label for="somatic">Somatic</label>
-                    <input type="checkbox" id="material" name="components" value="material">
-                    <label for="material">Material</label>
-            
-                    <input type="checkbox" id="ritual" name="ritual">
-                    <label for="ritual">Is a Ritual</label>
-            
-                    <input type="checkbox" id="concentration" name="concentration">
-                    <label for="concentration">Requires Concentration</label>
-            
-                    <input type="checkbox" id="upcast" name="upcast">
-                    <label for="upcast">Can be Upcast</label>
+                    <label>Range</label>
+                    <div class="input-group">
+                        <input type="number" id="range-value" name="range-value" min="0" placeholder="Value">
+                        <input type="text" id="range-unit" name="range-unit" placeholder="Unit">
+                    </div>
+                    
+                    <table id="components">
+                        <thead>
+                            <tr>
+                                <th colspan="3">Components</th>
+                            </tr>
+                            <tr>
+                                <th><label for="verbal">V</label></th>
+                                <th><label for="somatic">S</label></th>
+                                <th><label for="material">M</label></th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="verbal" name="components" value="verbal"></td>
+                                <td><input type="checkbox" id="somatic" name="components" value="somatic"></td>
+                                <td><input type="checkbox" id="material" name="components" value="material"></td>
+                            </tr>
+                        </thead>
+                    </table>
+
+                    <div class="checkbox-container">
+                        <label for="ritual">Ritual</label>
+                        <input type="checkbox" id="ritual" name="ritual">
+                    </div>
+                    
+                    <div class="checkbox-container">
+                        <label for="concentration">Concentration</label>
+                        <input type="checkbox" id="concentration" name="concentration">
+                    </div>
+                    
+                    <div class="checkbox-container">
+                        <label for="upcast">Upcast</label>
+                        <input type="checkbox" id="upcast" name="upcast">
+                    </div>
             
                     <input type="submit" value="Apply Filters">
                 </form>
