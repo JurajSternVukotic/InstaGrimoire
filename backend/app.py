@@ -38,16 +38,19 @@ def apply_filters(query, filters):
     if 'id' in filters:
         query = query.filter(lambda s: s.id == int(filters['id']))
     if 'sourcebook' in filters and filters['sourcebook'].lower() != 'any':
-        query = query.filter(lambda s: s.source_book == filters['sourcebook'])
+        query = query.filter(lambda s: s.source_book.lower() == filters['sourcebook'].lower())  # change here
     if 'name' in filters:
         lower_case_name = filters['name'].lower()
         query = query.filter(lambda s: raw_sql(f"LOWER(s.name) LIKE '%{lower_case_name}%'"))
     if 'school' in filters and filters['school'].lower() != 'any':
-        query = query.filter(lambda s: s.school == filters['school'])
+        query = query.filter(lambda s: s.school.lower() == filters['school'].lower())  # change here
     if 'level' in filters and filters['level'].lower() != 'any':
-        query = query.filter(lambda s: s.level == filters['level'])
-    if 'casting-time-unit' in filters and filters['casting-time-unit'].lower() != 'any':
-        query = query.filter(lambda s: s.casting_time_unit == filters['casting-time-unit'])
+        query = query.filter(lambda s: s.level == int(filters['level']))  # Assuming level is a number
+    if 'casting_time_unit' in filters and filters['casting_time_unit'].lower() != 'any':
+        query = query.filter(lambda s: s.casting_time_unit.lower() == filters['casting_time_unit'].lower())  # change here
+    if 'range_unit' in filters and filters['range_unit'].lower() != 'any':
+        query = query.filter(lambda s: s.range_unit.lower() == filters['range_unit'].lower())  # change here
+
 
     return query
 

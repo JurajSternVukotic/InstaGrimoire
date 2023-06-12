@@ -982,53 +982,61 @@
         });
 
         const filterForm = document.getElementById('filters');
-        const sourcebookDropdown = document.querySelector('#sourcebook');
-        sourcebookDropdown.addEventListener('change', function () {
-            fetchSpells({
-                sourcebook: this.value
-            });
+
+        function getFilters() {
+            const sourcebook = document.querySelector('#sourcebook').value;
+            const id = document.querySelector('#id').value;
+            const spellName = document.querySelector('#spell-name').value;
+            const school = document.querySelector('#school').value;
+            const level = document.querySelector('#level').value;
+            const castingTimeUnit = document.querySelector('#casting-time-unit').value;
+            const rangeUnit = document.querySelector('#range-unit').value;
+
+            const filters = {
+                sourcebook,
+                id,
+                name: spellName,
+                school,
+                level,
+                casting_time_unit: castingTimeUnit,
+                range_unit: rangeUnit
+            };
+
+            for (let key in filters) {
+                if (filters[key] === "") {
+                    delete filters[key];
+                }
+            }
+
+            return filters;
+        }
+
+        document.querySelector('#sourcebook').addEventListener('change', function () {
+            fetchSpells(getFilters());
         });
 
-        const idInput = document.querySelector('#id');
-        idInput.addEventListener('input', function () {
-            fetchSpells({
-                id: this.value
-            });
+        document.querySelector('#id').addEventListener('input', function () {
+            fetchSpells(getFilters());
         });
 
-        const nameInput = document.querySelector('#spell-name');
-        nameInput.addEventListener('input', function () {
-            fetchSpells({
-                name: this.value
-            });
+        document.querySelector('#spell-name').addEventListener('input', function () {
+            fetchSpells(getFilters());
         });
 
-        const schoolDropdown = document.querySelector('#school');
-        schoolDropdown.addEventListener('change', function () {
-            fetchSpells({
-                school: this.value
-            });
+        document.querySelector('#school').addEventListener('change', function () {
+            fetchSpells(getFilters());
         });
 
-        const levelDropdown = document.querySelector('#level');
-        levelDropdown.addEventListener('change', function () {
-            fetchSpells({
-                level: this.value
-            });
+        document.querySelector('#level').addEventListener('change', function () {
+            fetchSpells(getFilters());
         });
 
-        const cTimeUnitDropdown = document.querySelector('#casting-time-unit');
-        cTimeUnitDropdown.addEventListener('change', function () {
-            fetchSpells({
-                casting_time_unit: this.value
-            });
+        document.querySelector('#casting-time-unit').addEventListener('change', function () {
+            fetchSpells(getFilters());
         });
 
-        const rangeUnitDropdown = document.querySelector('#range-unit');
-        rangeUnitDropdown.addEventListener('change', function () {
-            fetchSpells({
-                range_unit: this.value
-            });
+        document.querySelector('#range-unit').addEventListener('change', function () {
+            fetchSpells(getFilters());
         });
     </script>
 
