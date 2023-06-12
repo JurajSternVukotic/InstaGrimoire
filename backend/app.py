@@ -34,10 +34,11 @@ def get_spell_route(name):
 
 def apply_filters(query, filters):
     if 'id' in filters and filters['id']:
-        query = query.filter(Spell.id == int(filters['id']))  
-    if 'sourcebook' in filters and filters['sourcebook']:
-        query = query.filter(Spell.source_book == filters['sourcebook'])
+        query = query.filter(lambda s: s.id == int(filters['id']))
+    if 'sourcebook' in filters and filters['sourcebook'] != 'Any':
+        query = query.filter(lambda s: s.source_book == filters['sourcebook'])
     return query
+
 
 @app.route('/spells', methods=['GET'])
 @db_session
