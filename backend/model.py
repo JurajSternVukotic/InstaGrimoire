@@ -21,14 +21,19 @@ class CastingTimeUnit(Enum):
     SPECIAL = "Special"
     MINUTE = "Minute"
     HOUR = "Hour"
+    MINUTES = "Minutes"
+    HOURS = "Hours"
 
 class RangeUnit(Enum):
     FEET = "Feet"
     MILES = "Miles"
+    MILE = "Mile"
     SELF = "Self"
     TOUCH = "Touch"
     UNLIMITED = "Unlimited"
     SPECIAL = "Special"
+    SIGHT = "Sight"
+
 
 
 class Spell(db.Entity):

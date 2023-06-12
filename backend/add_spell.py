@@ -26,6 +26,9 @@ def add_spell(spell_data):
         if 'upcast' in spell_data:
             new_spell.upcast = spell_data['upcast']
 
+        if 'material_description' in spell_data:
+            new_spell.material_description = spell_data["material_description"]
+
         return new_spell.to_dict()
 
 if __name__ == '__main__':

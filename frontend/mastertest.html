@@ -549,6 +549,11 @@
                     <input type="text" id="spell-name" name="spell-name" placeholder="Spell Name">
                     <button id="filter-button">Filter!</button>
                     <div id="results">Results: 0</div>
+                    <form id="upload-form">
+                        <input type="file" id="file-input">
+                        <button type="button" id="upload-button">Upload</button>
+                    </form>
+
                 </div>
 
 
@@ -877,6 +882,23 @@
                 .then(data => {
                     console.log(data);
                 })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+
+        document.getElementById('upload-button').addEventListener('click', () => {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('http://localhost:5000/upload-json', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => console.log(data))
                 .catch((error) => {
                     console.error('Error:', error);
                 });
