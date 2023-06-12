@@ -9,6 +9,8 @@ from pony.orm import db_session, select
 from werkzeug.utils import secure_filename
 import os
 import json
+from pony.orm import raw_sql
+
 
 
 
@@ -33,11 +35,23 @@ def get_spell_route(name):
 
 
 def apply_filters(query, filters):
-    if 'id' in filters and filters['id']:
-        query = query.filter(Spell.id == int(filters['id']))  
-    if 'sourcebook' in filters and filters['sourcebook']:
-        query = query.filter(Spell.source_book == filters['sourcebook'])
+    if 'id' in filters:
+        query = query.filter(lambda s: s.id == int(filters['id']))
+    if 'sourcebook' in filters and filters['sourcebook'].lower() != 'any':
+        query = query.filter(lambda s: s.source_book == filters['sourcebook'])
+    if 'name' in filters:
+        lower_case_name = filters['name'].lower()
+        query = query.filter(lambda s: raw_sql(f"LOWER(s.name) LIKE '%{lower_case_name}%'"))
+    if 'school' in filters and filters['school'].lower() != 'any':
+        query = query.filter(lambda s: s.school == filters['school'])
+    if 'level' in filters and filters['level'].lower() != 'any':
+        query = query.filter(lambda s: s.level == filters['level'])
+    if 'casting-time-unit' in filters and filters['casting-time-unit'].lower() != 'any':
+        query = query.filter(lambda s: s.casting_time_unit == filters['casting-time-unit'])
+
     return query
+
+
 
 @app.route('/spells', methods=['GET'])
 @db_session

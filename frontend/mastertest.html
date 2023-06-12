@@ -482,20 +482,20 @@
 
                     <label for="sourcebook">Sourcebook</label>
                     <select id="sourcebook" name="sourcebook">
-                        <option value="Any">Any</option>
+                        <option value="any">Any</option>
                     </select>
 
                     <label for="school">School of Magic</label>
                     <select id="school" name="school">
                         <option value="any">Any</option>
-                        <option value="abjuration">Abjuration</option>
-                        <option value="conjuration">Conjuration</option>
-                        <option value="divination">Divination</option>
-                        <option value="enchantment">Enchantment</option>
-                        <option value="evocation">Evocation</option>
-                        <option value="illusion">Illusion</option>
-                        <option value="necromancy">Necromancy</option>
-                        <option value="transmutation">Transmutation</option>
+                        <option value="Abjuration">Abjuration</option>
+                        <option value="Conjuration">Conjuration</option>
+                        <option value="Divination">Divination</option>
+                        <option value="Enchantment">Enchantment</option>
+                        <option value="Evocation">Evocation</option>
+                        <option value="Illusion">Illusion</option>
+                        <option value="Necromancy">Necromancy</option>
+                        <option value="Transmutation">Transmutation</option>
                     </select>
 
                     <label for="level">Spell Level</label>
@@ -515,8 +515,6 @@
 
                     <label>Casting Time</label>
                     <div class="input-group">
-                        <input type="number" id="casting-time-value" name="casting-time-value" min="0"
-                            placeholder="Value">
                         <select id="casting-time-unit" name="casting-time-unit">
                             <option value="Any">Any</option>
                             <option value="action">Action</option>
@@ -530,7 +528,6 @@
 
                     <label>Range</label>
                     <div class="input-group">
-                        <input type="number" id="range-value" name="range-value" min="0" placeholder="Value">
                         <select id="range-unit" name="range-unit">
                             <option value="Any">Any</option>
                             <option value="feet">Feet</option>
@@ -728,6 +725,76 @@
         </div>
     </div>
     <script>
+        function displaySpells(data) {
+            const spellsContainer = document.querySelector('.spells');
+
+            // Clear previous spells
+            spellsContainer.innerHTML = '';
+
+            for (let spell of data) {
+                const spellDiv = document.createElement('div');
+                spellDiv.className = 'spell';
+
+                const spellName = document.createElement('span');
+                spellName.className = 'spell-name';
+                spellName.textContent = `${spell.name}`;
+
+                spellName.addEventListener("click", () => getSpellDetails(spell.name));
+
+                const spellLevel = document.createElement('span');
+                spellLevel.className = 'spell-level';
+                spellLevel.textContent = `| Level ${spell.level} |`;
+
+                const spellSchool = document.createElement('span');
+                spellSchool.className = 'spell-school';
+                spellSchool.textContent = ` ${spell.school}`;
+
+                spellDiv.appendChild(spellName);
+                spellDiv.appendChild(spellLevel);
+                spellDiv.appendChild(spellSchool);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Delete';
+
+                deleteButton.addEventListener('click', function () {
+                    fetch(`http://localhost:5000/spell/${spell.name}`, {
+                            method: 'DELETE'
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            spellsContainer.removeChild(spellDiv);
+                        })
+                        .catch(e => {
+                            console.log('There was a problem with the delete request: ' + e.message);
+                        });
+                });
+
+                spellDiv.appendChild(deleteButton);
+
+                spellsContainer.appendChild(spellDiv);
+            }
+
+            const resultsCounter = document.getElementById('results');
+            resultsCounter.textContent = `${data.length} results`;
+        }
+
+        // Fetches spells from backend
+        function fetchSpells(filters) {
+            let url = 'http://localhost:5000/spells';
+
+            // Check if filters were provided and append them to the URL
+            if (filters) {
+                url += '?' + new URLSearchParams(filters);
+            }
+
+            fetch(url)
+                .then(response => response.json())
+                .then(displaySpells);
+        }
+
         window.onload = function () {
             fetch('http://localhost:5000/sourcebooks')
                 .then(response => response.json())
@@ -742,72 +809,14 @@
                     }
                 });
 
-
-
-
-
-            fetch('http://localhost:5000/spells')
-                .then(response => response.json())
-                .then(data => {
-                    const spellsContainer = document.querySelector('.spells');
-
-                    for (let spell of data) {
-                        const spellDiv = document.createElement('div');
-                        spellDiv.className = 'spell';
-
-                        const spellName = document.createElement('span');
-                        spellName.className = 'spell-name';
-                        spellName.textContent = `${spell.name}`;
-
-                        spellName.addEventListener("click", () => getSpellDetails(spell.name));
-
-                        const spellLevel = document.createElement('span');
-                        spellLevel.className = 'spell-level';
-                        spellLevel.textContent = `| Level ${spell.level} |`;
-
-                        const spellSchool = document.createElement('span');
-                        spellSchool.className = 'spell-school';
-                        spellSchool.textContent = ` ${spell.school}`;
-
-                        spellDiv.appendChild(spellName);
-                        spellDiv.appendChild(spellLevel);
-                        spellDiv.appendChild(spellSchool);
-
-
-
-                        const deleteButton = document.createElement('button');
-                        deleteButton.className =
-                            'delete-button';
-                        deleteButton.textContent = 'Delete';
-
-                        deleteButton.addEventListener('click', function () {
-                            fetch(`http://localhost:5000/spell/${spell.name}`, {
-                                    method: 'DELETE'
-                                })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error(
-                                            `HTTP error! status: ${response.status}`);
-                                    }
-                                    spellsContainer.removeChild(spellDiv);
-                                })
-                                .catch(e => {
-                                    console.log(
-                                        'There was a problem with the delete request: ' +
-                                        e
-                                        .message);
-                                });
-                        });
-
-                        spellDiv.appendChild(deleteButton);
-
-                        spellsContainer.appendChild(spellDiv);
-                        const resultsCounter = document.getElementById('results');
-                        resultsCounter.textContent =
-                            `${data.length} results`;
-                    }
-                });
+            // Fetch all spells
+            fetchSpells();
         }
+
+
+
+
+
 
         function getSpellDetails(name) {
             fetch(`http://localhost:5000/spell/${name}`)
@@ -820,12 +829,15 @@
                     document.getElementById("spellName").textContent = spell.name;
                     document.getElementById("spellLevel").textContent = spell.level;
                     document.getElementById("spellSchool").textContent = spell.school;
-                    document.getElementById("castingTimeValue").textContent = spell.casting_time_value;
-                    document.getElementById("castingTimeUnit").textContent = spell.casting_time_unit;
+                    document.getElementById("castingTimeValue").textContent = spell
+                        .casting_time_value;
+                    document.getElementById("castingTimeUnit").textContent = spell
+                        .casting_time_unit;
                     document.getElementById("rangeValue").textContent = spell.range_value;
                     document.getElementById("rangeUnit").textContent = spell.range_unit;
                     document.getElementById("components").textContent = getComponents(spell);
-                    document.getElementById("materialDescription").textContent = spell.component_m ? spell
+                    document.getElementById("materialDescription").textContent = spell.component_m ?
+                        spell
                         .material_description : "None";
                     document.getElementById("sourceBook").textContent = spell.source_book;
                     document.getElementById("description").textContent = spell.description;
@@ -970,75 +982,53 @@
         });
 
         const filterForm = document.getElementById('filters');
+        const sourcebookDropdown = document.querySelector('#sourcebook');
+        sourcebookDropdown.addEventListener('change', function () {
+            fetchSpells({
+                sourcebook: this.value
+            });
+        });
 
-        filterForm.addEventListener('submit', function (event) {
-            event.preventDefault();
+        const idInput = document.querySelector('#id');
+        idInput.addEventListener('input', function () {
+            fetchSpells({
+                id: this.value
+            });
+        });
 
-            let filterParams = new URLSearchParams(new FormData(filterForm)).toString();
+        const nameInput = document.querySelector('#spell-name');
+        nameInput.addEventListener('input', function () {
+            fetchSpells({
+                name: this.value
+            });
+        });
 
-            fetch(`http://localhost:5000/spells?${filterParams}`)
-                .then(response => response.json())
-                .then(data => {
-                    const spellsContainer = document.querySelector('.spells');
+        const schoolDropdown = document.querySelector('#school');
+        schoolDropdown.addEventListener('change', function () {
+            fetchSpells({
+                school: this.value
+            });
+        });
 
-                    for (let spell of data) {
-                        const spellDiv = document.createElement('div');
-                        spellDiv.className = 'spell';
+        const levelDropdown = document.querySelector('#level');
+        levelDropdown.addEventListener('change', function () {
+            fetchSpells({
+                level: this.value
+            });
+        });
 
-                        const spellName = document.createElement('span');
-                        spellName.className = 'spell-name';
-                        spellName.textContent = `${spell.name}`;
+        const cTimeUnitDropdown = document.querySelector('#casting-time-unit');
+        cTimeUnitDropdown.addEventListener('change', function () {
+            fetchSpells({
+                casting_time_unit: this.value
+            });
+        });
 
-                        spellName.addEventListener("click", () => getSpellDetails(spell.name));
-
-                        const spellLevel = document.createElement('span');
-                        spellLevel.className = 'spell-level';
-                        spellLevel.textContent = `| Level ${spell.level} |`;
-
-                        const spellSchool = document.createElement('span');
-                        spellSchool.className = 'spell-school';
-                        spellSchool.textContent = ` ${spell.school}`;
-
-                        spellDiv.appendChild(spellName);
-                        spellDiv.appendChild(spellLevel);
-                        spellDiv.appendChild(spellSchool);
-
-
-
-                        const deleteButton = document.createElement('button');
-                        deleteButton.className =
-                            'delete-button';
-                        deleteButton.textContent = 'Delete';
-
-                        deleteButton.addEventListener('click', function () {
-                            fetch(`http://localhost:5000/spell/${spell.name}`, {
-                                    method: 'DELETE'
-                                })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error(
-                                            `HTTP error! status: ${response.status}`
-                                        );
-                                    }
-                                    spellsContainer.removeChild(spellDiv);
-                                })
-                                .catch(e => {
-                                    console.log(
-                                        'There was a problem with the delete request: ' +
-                                        e
-                                        .message);
-                                });
-                        });
-
-                        spellDiv.appendChild(deleteButton);
-
-                        spellsContainer.appendChild(spellDiv);
-                        const resultsCounter = document.getElementById('results');
-                        resultsCounter.textContent =
-                            `${data.length} results`;
-                    }
-                });
-
+        const rangeUnitDropdown = document.querySelector('#range-unit');
+        rangeUnitDropdown.addEventListener('change', function () {
+            fetchSpells({
+                range_unit: this.value
+            });
         });
     </script>
 
