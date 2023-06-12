@@ -32,12 +32,29 @@ def get_spell_route(name):
         return jsonify({"error": "No spell found with the provided name"}), 404
 
 
+def apply_filters(query, filters):
+    if 'id' in filters and filters['id']:
+        query = query.filter(Spell.id == int(filters['id']))  
+    if 'sourcebook' in filters and filters['sourcebook']:
+        query = query.filter(Spell.source_book == filters['sourcebook'])
+    return query
+
 @app.route('/spells', methods=['GET'])
 @db_session
 def get_all_spells():
-    spells = select(s for s in Spell)[:]
+    filters = request.args
+    query = select(s for s in Spell)
+    query = apply_filters(query, filters)
+    spells = query[:]
     spell_dicts = [s.to_dict() for s in spells]
     return jsonify(spell_dicts), 200
+
+@app.route('/sourcebooks', methods=['GET'])
+@db_session
+def get_all_sourcebooks():
+    sourcebooks = list(select(s.source_book for s in Spell).distinct())
+    return jsonify(sourcebooks), 200
+
 
 @app.route('/spell/<name>', methods=['DELETE'])
 def delete_spell_route(name):

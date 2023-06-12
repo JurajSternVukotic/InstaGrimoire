@@ -482,30 +482,65 @@
 
                     <label for="sourcebook">Sourcebook</label>
                     <select id="sourcebook" name="sourcebook">
-                        <option value="">Select a sourcebook</option>
+                        <option value="Any">Any</option>
                     </select>
 
                     <label for="school">School of Magic</label>
                     <select id="school" name="school">
-                        <option value="">Select a School</option>
+                        <option value="any">Any</option>
+                        <option value="abjuration">Abjuration</option>
+                        <option value="conjuration">Conjuration</option>
+                        <option value="divination">Divination</option>
+                        <option value="enchantment">Enchantment</option>
+                        <option value="evocation">Evocation</option>
+                        <option value="illusion">Illusion</option>
+                        <option value="necromancy">Necromancy</option>
+                        <option value="transmutation">Transmutation</option>
                     </select>
 
                     <label for="level">Spell Level</label>
                     <select id="level" name="level">
-                        <option value="">Select a level</option>
+                        <option value="Any">Any</option>
+                        <option value="0">Cantrip</option>
+                        <option value="1">1st level</option>
+                        <option value="2">2nd level</option>
+                        <option value="3">3rd level</option>
+                        <option value="4">4th level</option>
+                        <option value="5">5th level</option>
+                        <option value="6">6th level</option>
+                        <option value="7">7th level</option>
+                        <option value="8">8th level</option>
+                        <option value="9">9th level</option>
                     </select>
 
                     <label>Casting Time</label>
                     <div class="input-group">
                         <input type="number" id="casting-time-value" name="casting-time-value" min="0"
                             placeholder="Value">
-                        <input type="text" id="casting-time-unit" name="casting-time-unit" placeholder="Unit">
+                        <select id="casting-time-unit" name="casting-time-unit">
+                            <option value="Any">Any</option>
+                            <option value="action">Action</option>
+                            <option value="bonus_action">Bonus Action</option>
+                            <option value="reaction">Reaction</option>
+                            <option value="special">Special</option>
+                            <option value="minute">Minute</option>
+                            <option value="hour">Hour</option>
+                        </select>
                     </div>
 
                     <label>Range</label>
                     <div class="input-group">
                         <input type="number" id="range-value" name="range-value" min="0" placeholder="Value">
-                        <input type="text" id="range-unit" name="range-unit" placeholder="Unit">
+                        <select id="range-unit" name="range-unit">
+                            <option value="Any">Any</option>
+                            <option value="feet">Feet</option>
+                            <option value="mile">Mile</option>
+                            <option value="self">Self</option>
+                            <option value="touch">Touch</option>
+                            <option value="unlimited">Unlimited</option>
+                            <option value="special">Special</option>
+                            <option value="sight">Sight</option>
+                        </select>
                     </div>
 
                     <table id="componentsFilter">
@@ -694,6 +729,23 @@
     </div>
     <script>
         window.onload = function () {
+            fetch('http://localhost:5000/sourcebooks')
+                .then(response => response.json())
+                .then(data => {
+                    const sourcebookDropdown = document.querySelector('#sourcebook');
+
+                    for (let sourcebook of data) {
+                        const option = document.createElement('option');
+                        option.value = sourcebook;
+                        option.text = sourcebook;
+                        sourcebookDropdown.add(option);
+                    }
+                });
+
+
+
+
+
             fetch('http://localhost:5000/spells')
                 .then(response => response.json())
                 .then(data => {
@@ -705,17 +757,17 @@
 
                         const spellName = document.createElement('span');
                         spellName.className = 'spell-name';
-                        spellName.textContent = spell.name;
+                        spellName.textContent = `${spell.name}`;
 
                         spellName.addEventListener("click", () => getSpellDetails(spell.name));
 
                         const spellLevel = document.createElement('span');
                         spellLevel.className = 'spell-level';
-                        spellLevel.textContent = `Level ${spell.level}`;
+                        spellLevel.textContent = `| Level ${spell.level} |`;
 
                         const spellSchool = document.createElement('span');
                         spellSchool.className = 'spell-school';
-                        spellSchool.textContent = spell.school;
+                        spellSchool.textContent = ` ${spell.school}`;
 
                         spellDiv.appendChild(spellName);
                         spellDiv.appendChild(spellLevel);
@@ -734,12 +786,15 @@
                                 })
                                 .then(response => {
                                     if (!response.ok) {
-                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                        throw new Error(
+                                            `HTTP error! status: ${response.status}`);
                                     }
                                     spellsContainer.removeChild(spellDiv);
                                 })
                                 .catch(e => {
-                                    console.log('There was a problem with the delete request: ' + e
+                                    console.log(
+                                        'There was a problem with the delete request: ' +
+                                        e
                                         .message);
                                 });
                         });
@@ -912,6 +967,78 @@
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+        });
+
+        const filterForm = document.getElementById('filters');
+
+        filterForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            let filterParams = new URLSearchParams(new FormData(filterForm)).toString();
+
+            fetch(`http://localhost:5000/spells?${filterParams}`)
+                .then(response => response.json())
+                .then(data => {
+                    const spellsContainer = document.querySelector('.spells');
+
+                    for (let spell of data) {
+                        const spellDiv = document.createElement('div');
+                        spellDiv.className = 'spell';
+
+                        const spellName = document.createElement('span');
+                        spellName.className = 'spell-name';
+                        spellName.textContent = `${spell.name}`;
+
+                        spellName.addEventListener("click", () => getSpellDetails(spell.name));
+
+                        const spellLevel = document.createElement('span');
+                        spellLevel.className = 'spell-level';
+                        spellLevel.textContent = `| Level ${spell.level} |`;
+
+                        const spellSchool = document.createElement('span');
+                        spellSchool.className = 'spell-school';
+                        spellSchool.textContent = ` ${spell.school}`;
+
+                        spellDiv.appendChild(spellName);
+                        spellDiv.appendChild(spellLevel);
+                        spellDiv.appendChild(spellSchool);
+
+
+
+                        const deleteButton = document.createElement('button');
+                        deleteButton.className =
+                            'delete-button';
+                        deleteButton.textContent = 'Delete';
+
+                        deleteButton.addEventListener('click', function () {
+                            fetch(`http://localhost:5000/spell/${spell.name}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(
+                                            `HTTP error! status: ${response.status}`
+                                        );
+                                    }
+                                    spellsContainer.removeChild(spellDiv);
+                                })
+                                .catch(e => {
+                                    console.log(
+                                        'There was a problem with the delete request: ' +
+                                        e
+                                        .message);
+                                });
+                        });
+
+                        spellDiv.appendChild(deleteButton);
+
+                        spellsContainer.appendChild(spellDiv);
+                        const resultsCounter = document.getElementById('results');
+                        resultsCounter.textContent =
+                            `${data.length} results`;
+                    }
+                });
+
         });
     </script>
 
