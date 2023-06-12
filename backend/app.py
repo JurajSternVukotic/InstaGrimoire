@@ -53,6 +53,7 @@ def apply_filters(query, filters):
 
 
 
+
 @app.route('/spells', methods=['GET'])
 @db_session
 def get_all_spells():
