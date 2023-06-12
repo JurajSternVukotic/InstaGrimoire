@@ -540,7 +540,7 @@
                         </select>
                     </div>
 
-                    <table id="componentsFilter">
+                    <!-- <table id="componentsFilter">
                         <thead>
                             <tr>
                                 <th colspan="3">Components</th>
@@ -556,9 +556,9 @@
                                 <td><input type="checkbox" id="material" name="components" value="material"></td>
                             </tr>
                         </thead>
-                    </table>
+                    </table> -->
 
-                    <div class="checkbox-container">
+                    <!-- <div class="checkbox-container">
                         <label for="ritual">Ritual</label>
                         <input type="checkbox" id="ritual" name="ritual">
                     </div>
@@ -566,20 +566,20 @@
                     <div class="checkbox-container">
                         <label for="concentration">Concentration</label>
                         <input type="checkbox" id="concentration" name="concentration">
-                    </div>
+                    </div> -->
 
-                    <div class="checkbox-container">
+                    <!-- <div class="checkbox-container">
                         <label for="upcast">Upcast</label>
                         <input type="checkbox" id="upcast" name="upcast">
-                    </div>
+                    </div> -->
 
-                    <input type="submit" value="Apply Filters">
+                    <input type="submit" value="Reset Filters">
                 </form>
             </div>
             <div class="spell-list">
                 <div class="search">
                     <input type="text" id="spell-name" name="spell-name" placeholder="Spell Name">
-                    <button id="filter-button">Filter!</button>
+                    <!-- <button id="filter-button">Filter!</button> -->
                     <div id="results">Results: 0</div>
                     <form id="upload-form">
                         <input type="file" id="file-input">
@@ -728,7 +728,6 @@
         function displaySpells(data) {
             const spellsContainer = document.querySelector('.spells');
 
-            // Clear previous spells
             spellsContainer.innerHTML = '';
 
             for (let spell of data) {
@@ -781,11 +780,9 @@
             resultsCounter.textContent = `${data.length} results`;
         }
 
-        // Fetches spells from backend
         function fetchSpells(filters) {
             let url = 'http://localhost:5000/spells';
 
-            // Check if filters were provided and append them to the URL
             if (filters) {
                 url += '?' + new URLSearchParams(filters);
             }
@@ -809,7 +806,6 @@
                     }
                 });
 
-            // Fetch all spells
             fetchSpells();
         }
 
@@ -991,6 +987,8 @@
             const level = document.querySelector('#level').value;
             const castingTimeUnit = document.querySelector('#casting-time-unit').value;
             const rangeUnit = document.querySelector('#range-unit').value;
+            const classes = Array.from(document.querySelectorAll('input[name="class"]:checked')).map(input => input.id);
+
 
             const filters = {
                 sourcebook,
@@ -999,7 +997,8 @@
                 school,
                 level,
                 casting_time_unit: castingTimeUnit,
-                range_unit: rangeUnit
+                range_unit: rangeUnit,
+                classes
             };
 
             for (let key in filters) {
@@ -1037,6 +1036,12 @@
 
         document.querySelector('#range-unit').addEventListener('change', function () {
             fetchSpells(getFilters());
+        });
+
+        Array.from(document.querySelectorAll('input[name="class"]')).forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                fetchSpells(getFilters());
+            });
         });
     </script>
 
