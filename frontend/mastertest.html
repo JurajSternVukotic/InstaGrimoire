@@ -609,7 +609,7 @@
                     <ul id="classesList"></ul>
                 </div>
 
-                <form id="add-spell-form" style="display: none">
+                <form id="add-spell-form" style="display: none" data-mode="add">
                     <label for="name">Name:</label><br>
                     <input type="text" id="name" name="name"><br>
                     <label for="level">Level:</label><br>
@@ -803,6 +803,7 @@
         addButton.addEventListener('click', function () {
             spellDetail.style.display = 'none';
             spellForm.style.display = 'block';
+            spellForm.dataset.mode = 'add';
 
             addButton.disabled = true;
             viewButton.disabled = false;
@@ -822,6 +823,7 @@
         editButtonTab.addEventListener('click', function () {
             spellDetail.style.display = 'none';
             spellForm.style.display = 'block';
+            spellForm.dataset.mode = 'edit';
 
             addButton.disabled = false;
             viewButton.disabled = false;
@@ -870,9 +872,17 @@
             jsonObject.component_m = spellForm['component_m'].checked;
 
 
+            let url, method;
+            if (spellForm.dataset.mode === 'add') {
+                url = 'http://localhost:5000/spell';
+                method = 'POST';
+            } else {
+                url = `http://localhost:5000/spell/${jsonObject.name}`;
+                method = 'PATCH';
+            }
 
-            fetch('http://localhost:5000/spell', {
-                    method: 'POST',
+            fetch(url, {
+                    method: method,
                     headers: {
                         'Content-Type': 'application/json'
                     },
