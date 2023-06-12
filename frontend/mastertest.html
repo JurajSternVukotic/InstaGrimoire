@@ -930,6 +930,14 @@
                 jsonObject[key] = value;
             }
 
+            if (jsonObject.range_value === '') {
+                jsonObject.range_value = null;
+            }
+
+            if (jsonObject.casting_time_value === '') {
+                jsonObject.casting_time_value = null;
+            }
+
             jsonObject.component_v = spellForm['component_v'].checked;
             jsonObject.component_s = spellForm['component_s'].checked;
             jsonObject.component_m = spellForm['component_m'].checked;

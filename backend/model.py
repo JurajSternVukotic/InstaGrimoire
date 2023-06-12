@@ -41,7 +41,7 @@ class Spell(db.Entity):
     name = Required(str, unique = True)
     level = Required(int)
     school = Required(str)
-    casting_time_value = Required(int)
+    casting_time_value = Optional(int)
     casting_time_unit = Required(str)
     range_value = Optional(int)
     range_unit = Required(str)
