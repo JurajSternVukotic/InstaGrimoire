@@ -30,11 +30,10 @@ ___
 ## Opis strukture projekta
 
 ### Root
-Dakle u root folderu se nalaze 6 stvari:
+Dakle u root folderu se nalaze 5 stvari:
 - .gitignore - Koristimo kako ne bi smo nepotrebno neke datoteke pratili
 - README.MD - Ono što trenutačno čitate, tu pišem dokumentaciju, funkcionalnosti i slično
 - docker-compose.yml - Ovo je file koji nam treba kako bi docker kontejneri mogli komunicirati jedni sa drugima, ovdje specifićno mi treba kako bi definirao backend i frontend servis, koji svaki ima svoj zasebni kontejner te kako da komuniciraju međusobno
-- auto-setup.bat - ovo je Windows skripta koja bi trebala sama postaviti sve
 - backend 
 - frontend
 

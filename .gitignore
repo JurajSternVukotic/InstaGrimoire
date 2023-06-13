@@ -1,4 +1,5 @@
 frontend/mastergrimoire.html
+backend/database.sqlite
 backend/__pycache__
 .vscode
 __pycache__
