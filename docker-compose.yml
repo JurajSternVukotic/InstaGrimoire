@@ -1,0 +1,19 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./backend:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+    command: flask run
+
+  frontend:
+    build: ./frontend
+    ports:
+      - '80:80'
+    volumes:
+      - ./frontend:/usr/share/nginx/html
