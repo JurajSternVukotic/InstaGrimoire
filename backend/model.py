@@ -96,5 +96,5 @@ class Spell(db.Entity):
 
 
 def connect():
-    db.bind(provider='sqlite', filename='spells.db', create_db=True)
+    db.bind(provider='sqlite', filename='database.sqlite', create_db=True)
     db.generate_mapping(create_tables=True)

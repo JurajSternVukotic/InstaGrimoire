@@ -3,6 +3,7 @@ const viewButton = document.getElementById('view-button');
 const spellDetail = document.getElementById('detail-display');
 const spellForm = document.getElementById('add-spell-form');
 const editButtonTab = document.getElementById('edit-button-tab')
+const submitButton = document.getElementById('submit-but')
 
 addButton.addEventListener('click', function () {
     spellDetail.style.display = 'none';
@@ -106,6 +107,7 @@ spellForm.addEventListener('submit', function (event) {
         .catch((error) => {
             console.error('Error:', error);
         });
+
 });
 
 document.getElementById('upload-button').addEventListener('click', () => {
