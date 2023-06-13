@@ -28,8 +28,6 @@ function getSpellDetails(name) {
             document.getElementById("rangeValue").textContent = spell.range_value;
             document.getElementById("rangeUnit").textContent = spell.range_unit;
             document.getElementById("components").textContent = getComponents(spell);
-            document.getElementById("materialDescription").textContent = spell.component_m && spell.component_m.trim() !== '' ? spell.material_description : "WHAT";
-
             document.getElementById("sourceBook").textContent = spell.source_book;
             document.getElementById("description").textContent = spell.description;
             document.getElementById("upcast").textContent = spell.upcast;

@@ -74,3 +74,56 @@ fetch('http://localhost:5000/spells')
             }
         });
     });
+
+fetch('http://localhost:5000/spells')
+    .then(response => response.json())
+    .then(spells => {
+        let spellCountsBySourcebook = {};
+        for (let spell of spells) {
+            let sourcebook = spell.source_book;
+            if (!(sourcebook in spellCountsBySourcebook)) {
+                spellCountsBySourcebook[sourcebook] = 0;
+            }
+            spellCountsBySourcebook[sourcebook]++;
+        }
+
+        let labels = Object.keys(spellCountsBySourcebook);
+        let data = Object.values(spellCountsBySourcebook);
+
+        let ctx = document.getElementById('spells-by-sourcebook').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Number of spells by sourcebook',
+                    data: data,
+                    backgroundColor: 'rgba(140, 192, 192, 1)',
+                    borderColor: 'rgba(240, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        display: false
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function (context) {
+                                return context[0].label;
+                            },
+                            label: function (context) {
+                                return context.dataset.label + ': ' + context.parsed.y + ' spells';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
