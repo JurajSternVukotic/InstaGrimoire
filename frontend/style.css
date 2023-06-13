@@ -1,9 +1,7 @@
 body {
     margin: 0;
-    background-image: url('https://media.discordapp.net/attachments/1018295588619571350/1116836445353693204/beboid_An_abstract_portrayal_of_magic_in_action_envisioned_as_s_4160f95a-ba07-4e7b-97f1-c42458d9f3b0.png?width=935&height=935');
-    background-size: cover;
-    background-position: center;
-    padding: 15px 45px 45px 45px;
+    background: url('https://media.discordapp.net/attachments/1018295588619571350/1116836445353693204/beboid_An_abstract_portrayal_of_magic_in_action_envisioned_as_s_4160f95a-ba07-4e7b-97f1-c42458d9f3b0.png?width=935&height=935') center/cover;
+    padding: 15px 45px 45px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,9 +30,8 @@ body {
     display: flex;
 }
 
-.title-nav {
-    background-color: lightblue;
-    width: 25%;
+.title-nav,
+.form-selection {
     height: 100%;
     display: flex;
     justify-content: center;
@@ -42,14 +39,14 @@ body {
     padding: 0 20px;
 }
 
+.title-nav {
+    background-color: lightblue;
+    width: 25%;
+}
+
 .form-selection {
     background-color: lightcoral;
     width: 75%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
 }
 
 .main {
@@ -57,23 +54,27 @@ body {
     height: calc(100vh - 180px);
 }
 
+.filter-options,
+.spell-list,
+.spell-detail,
+#spell-form {
+    padding: 0 20px;
+}
+
 .filter-options {
     background-color: lightblue;
     width: 16.66%;
-    padding: 0 20px;
 }
 
 .spell-list {
     background-color: lightpink;
     width: 50%;
-    padding: 0 20px;
 }
 
 .spell-detail,
 #spell-form {
     background-color: lightgrey;
     width: 33.33%;
-    padding: 0 20px;
 }
 
 .footer {
@@ -108,7 +109,6 @@ body {
     border-left: 1px solid white;
 }
 
-
 .footer div:not(:first-child)::before {
     content: "";
     position: absolute;
@@ -124,12 +124,6 @@ body {
 
 .footer div:first-child::before {
     border-left: none;
-}
-
-.filter-options {
-    background-color: lightblue;
-    width: 16.66%;
-    padding: 0 20px;
 }
 
 #filters {
@@ -173,10 +167,7 @@ body {
     padding: 10px;
 }
 
-#componentsFilter tr {
-    border: 3px solid #555;
-}
-
+#componentsFilter tr,
 #componentsFilter td {
     border: 3px solid #555;
     padding: 10px;
@@ -186,7 +177,6 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
-
 
 .input-group {
     display: grid;
@@ -198,9 +188,6 @@ body {
     box-sizing: border-box;
     padding: 0 5px;
 }
-
-
-
 
 .checkbox-container {
     display: flex;
@@ -217,18 +204,7 @@ input[type='number'] {
     height: 30px;
 }
 
-.title-nav {
-    background-color: lightblue;
-    width: 25%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-}
-
-title-nav h1 {
+.title-nav h1 {
     margin-bottom: 15px;
 }
 
