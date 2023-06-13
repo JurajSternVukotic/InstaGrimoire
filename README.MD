@@ -14,10 +14,10 @@ ___
 1. Napraviti novi folder gdje ćete klonirati projekt.
 2. Otvoriti git bash (desni klik -> git bash here) u folderu.
 3. Kopirati sljedeću komandu za kloniranje repozitorija: ```git clone https://github.com/JurajSternVukotic/InstaGrimoire```
-4. Sačekati da se repozitorij klonira, trebali bi ste vidjeti zadnje: ```Resolving deltas: 100% (240/240), done.``` i onda nakon toga opet input.
+4. Sačekati da se repozitorij klonira, trebali bi ste vidjeti zadnje: ```instagrimoire-backend-1   | Press CTRL+C to quit``` i onda nakon toga opet input.
 5. Upisati komandu ```cd InstaGrimoire```
 6. Upisati komandu ```docker-compose up``` te sačekati da se sve setuppira i pokrenu kontejneri (može potrajati od par sekunda do par minuta)
-7. Otvoriti web preglednik (Testirano na Google Chrome) te posjetiti adresu ```localhost:80``` 
+7. Otvoriti web preglednik (Testirano na Google Chrome) te posjetiti adresu ```localhost``` 
 8. Trebalo bi vam raditi
 
 *Napomena* Frontend je rađen za rezoluciju 2560x1440, na nižima igleda čuno, ako možete molim vas stavite tu rezoluciju
@@ -92,7 +92,30 @@ ___
 ## Funkcionalnosti web aplikacije
 
 ### Osnovne funkcionalnsoti (CRUD):
+- CREATE 
+  - Dodavanje spellova kroz add formu
+- READ
+  - Dohvaćanje osnovnih informacija svih spellova iz baze, te prikaz istih
+  - Kliknom na spell sa liste, dohvaćanje i prihaz ostalih informacija
+- UPDATE
+  - Promjena spellova kroz edit formu
+- DELETE
+  - Brisanje spellova pomoću delete gumba
 
-### Specifične funkcionalnosti:
-
+### Dodatne funkcionalnosti
+- Filtriranje
+  - Kako je teško pregledati npr. 575 spellova u listi, dodao sam nekoliko metoda filtriranja
+  - Prema ID-u
+  - Prema imenu, kako pišemo ime spella sve spellovi koji sadrže taj substring u imenu će se pokazivati
+  - Prema knjizi iz koje su, ovdje se lista knjiga dinamicki updatea te uvijek sadrži sve knjige iz baze
+  - Prema School of magic
+  - Prema Levelu spella
+  - Prema vremenu potrebnom za izvod
+  - Prema dometu
+  - Prema klasi za koju je spell
+  - I naposlijetku bilo koja kombinacija prijespomenutog
+- Vizualizacija
+  - Sa strane uvijek imamo osnovnu vizualizaciju o raspodjeli spellova po levelu i skoli radi laganog pregleda podataka pomoću chart.js
+- Import from file
+  - Kako bi se lakše dodali spellovi koji su standardni ili neka grupa koristi, može se izabrati datoteka za upload, te ako je .json dobro formatiran unutar nekoliko trenutaka će se sve iz tog jsona dodat.
 ___
